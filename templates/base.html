@@ -214,13 +214,153 @@
             margin-bottom: 1rem;
             display: block;
         }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .auth-buttons {
+                display: none;
+                width: 100%;
+                order: 4;
+                margin-top: 1rem;
+            }
+
+            .auth-buttons.active {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .auth-buttons a {
+                margin: 0;
+                text-align: center;
+            }
+
+            .hero {
+                height: 60vh;
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .search-widget {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .search-widget input,
+            .search-widget select {
+                width: 100%;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 1200px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
     </style>
+    <script>
+        function toggleMobileMenu() {
+            const nav = document.querySelector('nav');
+            const authButtons = document.querySelector('.auth-buttons');
+            nav.classList.toggle('active');
+            authButtons.classList.toggle('active');
+        }
+    </script>
 </head>
 
 <body>
     <header>
         <div class="logo">
             <a href="{% url 'home' %}">GRANDMASTER TRAVEL</a>
+        </div>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <nav>
             <ul>
