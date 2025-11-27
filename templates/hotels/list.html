@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem;">
+    <h1 class="section-title">Our Hotels</h1>
+    <div class="grid" style="grid-template-columns: 1fr 3fr;">
+        <!-- Sidebar Filters -->
+        <aside>
+            <div class="card" style="padding: 1.5rem;">
+                <h3>Filter By</h3>
+                <form method="get">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Location</label>
+                        <input type="text" name="location" placeholder="e.g. Nairobi"
+                            style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Stars</label>
+                        <select name="stars" style="width: 100%; padding: 0.5rem;">
+                            <option value="">Any</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Filter</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Hotel Grid -->
+        <div class="grid">
+            {% for hotel in hotels %}
+            <div class="card">
+                {% if hotel.image %}
+                {% if hotel.source == 'local' %}
+                <img src="{{ hotel.image }}" alt="{{ hotel.name }}">
+                {% else %}
+                <img src="{{ hotel.image }}" alt="{{ hotel.name }}">
+                {% endif %}
+                {% else %}
+                <img src="https://via.placeholder.com/400x200" alt="{{ hotel.name }}">
+                {% endif %}
+                <div class="card-content">
+                    <h3 class="card-title">{{ hotel.name }}</h3>
+                    <p>{{ hotel.location }} | {{ hotel.stars }} Stars</p>
+                    <span class="card-price">From KES {{ hotel.price }} / night</span>
+
+                    {% if hotel.source == 'local' %}
+                    <a href="{% url 'hotel_detail' hotel.slug %}" class="btn btn-primary"
+                        style="display: block; text-align: center; margin-top: 1rem;">View Details</a>
+                    {% else %}
+                    <a href="#" class="btn btn-primary"
+                        style="display: block; text-align: center; margin-top: 1rem; background-color: #003580;">View on
+                        Booking.com</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>No hotels found matching your criteria.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero"
+    style="height: 50vh; background-image: url('{% if hotel.image %}{{ hotel.image.url }}{% else %}https://via.placeholder.com/1200x600{% endif %}');">
+    <h1>{{ hotel.name }}</h1>
+    <p>{{ hotel.location }} | {{ hotel.stars }} Stars</p>
+</div>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 4rem;">
+    <div class="grid" style="grid-template-columns: 2fr 1fr;">
+        <!-- Main Content -->
+        <div>
+            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
+                <h2>About the Hotel</h2>
+                <p>{{ hotel.description }}</p>
+            </div>
+
+            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
+                <h2>Amenities</h2>
+                <ul
+                    style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; list-style-type: disc; padding-left: 1.5rem;">
+                    {% for amenity in hotel.amenities %}
+                    <li>{{ amenity }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 2rem;">
+                <h2>Room Types</h2>
+                <div class="grid" style="grid-template-columns: 1fr;">
+                    {% for room in hotel.room_types.all %}
+                    <div style="border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <h3>{{ room.name }}</h3>
+                        <p>Capacity: {{ room.capacity }} Guests</p>
+                        <p>Additional Cost: KES {{ room.price_modifier }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Sidebar -->
+        <aside>
+            <div class="card" style="padding: 2rem; position: sticky; top: 100px;">
+                <h3 style="color: var(--secondary-color); font-size: 1.5rem;">KES {{ hotel.price_per_night }}</h3>
+                <p>per night</p>
+                <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+                <form action="{% url 'book_hotel' hotel.id %}" method="get">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Check-in</label>
+                        <input type="date" name="check_in" required style="width: 100%; padding: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Check-out</label>
+                        <input type="date" name="check_out" required style="width: 100%; padding: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Room Type</label>
+                        <select name="room_type" style="width: 100%; padding: 0.5rem;">
+                            {% for room in hotel.room_types.all %}
+                            <option value="{{ room.id }}">{{ room.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Book Now</button>
+                </form>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

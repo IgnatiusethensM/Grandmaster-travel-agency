@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero"
+    style="height: 50vh; background-image: url('{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/1200x600{% endif %}');">
+    <h1>{{ package.title }}</h1>
+    <p>{{ package.duration_days }} Days | {{ package.destination.name }}</p>
+</div>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 4rem;">
+    <div class="grid" style="grid-template-columns: 2fr 1fr;">
+        <!-- Main Content -->
+        <div>
+            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
+                <h2>Overview</h2>
+                <p>{{ package.overview }}</p>
+            </div>
+
+            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
+                <h2>Itinerary</h2>
+                <ul>
+                    {% for day in package.itinerary %}
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Day {{ forloop.counter }}:</strong> {{ day }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 2rem;">
+                <h2>Inclusions</h2>
+                <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                    {% for item in package.inclusions %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                <h2 style="margin-top: 1rem;">Exclusions</h2>
+                <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                    {% for item in package.exclusions %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Booking Sidebar -->
+        <aside>
+            <div class="card" style="padding: 2rem; position: sticky; top: 100px;">
+                <h3 style="color: var(--secondary-color); font-size: 1.5rem;">KES {{ package.price }}</h3>
+                <p>per person</p>
+                <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+                <form action="{% url 'book_package' package.id %}" method="get">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Travel Date</label>
+                        <input type="date" name="date" required style="width: 100%; padding: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Travelers</label>
+                        <input type="number" name="adults" min="1" value="1" required
+                            style="width: 100%; padding: 0.5rem;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Book Now</button>
+                </form>
+                <button class="btn" style="width: 100%; margin-top: 1rem; border: 1px solid #ddd;">Request Custom
+                    Quote</button>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}
