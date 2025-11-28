@@ -1,29 +1,31 @@
-<!-- Testimonials Section -->
-<section class="testimonials-section section-padding bg-light">
+<section class="section bg-teal" id="testimonials">
     <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header light">
             <h2 class="section-title">What Our Travelers Say</h2>
-            <p class="section-subtitle">Real experiences from real travelers</p>
+            <p class="section-subtitle">Real experiences from real adventurers</p>
         </div>
 
-        <div class="testimonials-grid">
-            {% for testimonial in testimonials %}
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
-                    <div class="testimonial-info">
-                        <h4>{{ testimonial.name }}</h4>
-                        <span class="testimonial-location">{{ testimonial.location }}</span>
+        <div class="testimonials-carousel" id="testimonialsCarousel">
+            <div class="testimonials-track">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
+                        <div>
+                            <h4 class="testimonial-name">{{ testimonial.name }}</h4>
+                            <p class="testimonial-location">{{ testimonial.location }}</p>
+                        </div>
                     </div>
+                    <div class="testimonial-rating">
+                        <!-- Django template hack for range(5) since we know rating is 5 -->
+                        {% for i in "12345" %}
+                        <i data-lucide="star" class="star-icon filled"></i>
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.text }}"</p>
                 </div>
-                <div class="testimonial-rating">
-                    {% for i in "12345" %}
-                    <i data-lucide="star" size="16" fill="currentColor" class="text-gold"></i>
-                    {% endfor %}
-                </div>
-                <p class="testimonial-text">"{{ testimonial.text }}"</p>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>
