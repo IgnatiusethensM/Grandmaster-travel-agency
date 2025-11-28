@@ -114,12 +114,63 @@ def home(request):
 
     nav_links = [
         {"name": "Home", "href": "/"},
-        {"name": "Destinations", "href": "#destinations"},
-        {"name": "Safari Packages", "href": "#safari-packages"},
-        {"name": "Holidays", "href": "#holidays"},
-        {"name": "Corporates", "href": "#corporates"},
-        {"name": "Local Packages", "href": "#local-packages"},
-        {"name": "Blog", "href": "#blog"}
+        {
+            "name": "Destinations",
+            "href": "#destinations",
+            "dropdown": [
+                {"name": "Kenya", "href": "#"},
+                {"name": "Tanzania", "href": "#"},
+                {"name": "South Africa", "href": "#"},
+                {"name": "Rwanda", "href": "#"},
+                {"name": "Uganda", "href": "#"}
+            ]
+        },
+        {
+            "name": "Safari Packages",
+            "href": "#safari-packages",
+            "dropdown": [
+                {"name": "Luxury Safaris", "href": "#"},
+                {"name": "Budget Camping", "href": "#"},
+                {"name": "Family Safaris", "href": "#"},
+                {"name": "Honeymoon Specials", "href": "#"}
+            ]
+        },
+        {
+            "name": "Holidays",
+            "href": "#holidays",
+            "dropdown": [
+                {"name": "Christmas Deals", "href": "#"},
+                {"name": "Easter Getaways", "href": "#"},
+                {"name": "Summer Vacations", "href": "#"}
+            ]
+        },
+        {
+            "name": "Corporates",
+            "href": "#corporates",
+            "dropdown": [
+                {"name": "Team Building", "href": "#"},
+                {"name": "Conferences", "href": "#"},
+                {"name": "Incentive Travel", "href": "#"}
+            ]
+        },
+        {
+            "name": "Local Packages",
+            "href": "#local-packages",
+            "dropdown": [
+                {"name": "Weekend Getaways", "href": "#"},
+                {"name": "Day Trips", "href": "#"},
+                {"name": "Staycations", "href": "#"}
+            ]
+        },
+        {
+            "name": "Blog",
+            "href": "#blog",
+            "dropdown": [
+                {"name": "Travel Tips", "href": "#"},
+                {"name": "Wildlife Guide", "href": "#"},
+                {"name": "Cultural Insights", "href": "#"}
+            ]
+        }
     ]
 
     context = {
