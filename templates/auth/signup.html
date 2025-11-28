@@ -1,50 +1,36 @@
 {% extends 'base.html' %}
+{% load ui_tags %}
 
 {% block title %}Sign Up - Grandmaster Travel Agency{% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 2rem; margin-bottom: 2rem; max-width: 500px;">
-    <h2 class="section-title">Sign Up</h2>
-    <div class="card">
-        <div class="card-content">
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                <div style="margin-bottom: 1rem;">
-                    <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem;">{{ field.label }}:</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                    <small style="color: grey; display: block; margin-top: 0.2rem;">{{ field.help_text }}</small>
-                    {% endif %}
-                    {% for error in field.errors %}
-                    <div style="color: red; font-size: 0.9rem;">{{ error }}</div>
-                    {% endfor %}
-                </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
-            </form>
-            <p style="margin-top: 1rem; text-align: center;">
-                Already have an account? <a href="{% url 'login' %}"
-                    style="color: var(--primary-color); font-weight: bold;">Login here</a>.
-            </p>
-        </div>
+<div class="container" style="margin-top: 4rem; margin-bottom: 4rem; max-width: 500px;">
+    <div class="section-header text-center">
+        <h2 class="section-title">Sign Up</h2>
     </div>
+    {% ui_card %}
+    <div class="card-content p-6">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-4">
+                {% ui_label text=field.label for_id=field.id_for_label %}
+                {% ui_input name=field.name type=field.field.widget.input_type|default:"text" id=field.id_for_label %}
+                {% if field.help_text %}
+                <small class="text-muted-foreground text-xs mt-1 block">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <div class="text-destructive text-xs mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% ui_button text="Sign Up" variant="default" css_class="w-full" type="submit" %}
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-600">
+            Already have an account? <a href="{% url 'login' %}" class="text-gold font-semibold hover:underline">Login
+                here</a>.
+        </p>
+    </div>
+    {% end_ui_card %}
 </div>
-
-<style>
-    /* Simple styling for form inputs */
-    input[type="text"],
-    input[type="password"],
-    input[type="email"] {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    ul.errorlist {
-        list-style: none;
-        color: red;
-    }
-</style>
 {% endblock %}

@@ -1,3 +1,5 @@
+{% load ui_tags %}
+
 <!-- Blog Section -->
 <section class="blog-section section-padding">
     <div class="container">
@@ -10,7 +12,7 @@
             {% for article in articles %}
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="{{ article.image }}" alt="{{ article.title }}">
+                    {% ui_image_fallback src=article.image alt=article.title %}
                     <div class="blog-category">{{ article.category }}</div>
                 </div>
                 <div class="blog-content">

@@ -127,6 +127,13 @@ def home(request):
         "articles": articles,
         "footer_destinations": footer_destinations,
         "nav_links": nav_links,
+        "destinations_options": [
+            {"value": "kenya", "label": "Kenya"},
+            {"value": "tanzania", "label": "Tanzania"},
+            {"value": "south_africa", "label": "South Africa"},
+            {"value": "rwanda", "label": "Rwanda"},
+            {"value": "uganda", "label": "Uganda"},
+        ],
         "year": datetime.now().year
     }
 

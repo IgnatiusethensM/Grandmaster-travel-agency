@@ -81,13 +81,14 @@ img {
 }
 
 /* =========================================
-   2. Buttons
+   2. Buttons (Legacy - kept for compatibility if needed, but prefer UI components)
    ========================================= */
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.8rem 2rem;
     border-radius: 4px;
-    /* Slightly rounded */
     font-weight: 500;
     cursor: pointer;
     border: none;
@@ -95,38 +96,7 @@ img {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.9rem;
-}
-
-.btn-primary {
-    background-color: var(--secondary-color);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background-color: #bfa13f;
-    /* Darker gold */
-    transform: translateY(-2px);
-}
-
-.btn-dark {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: 1px solid var(--primary-color);
-}
-
-.btn-dark:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-}
-
-.btn-link {
-    color: var(--secondary-color);
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.btn-link:hover {
-    text-decoration: underline;
+    transition: var(--transition);
 }
 
 /* =========================================
