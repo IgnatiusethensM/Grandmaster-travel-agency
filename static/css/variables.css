@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Colors */
+    --primary-color: #1A1A1A;
+    --secondary-color: #D4AF37;
+    /* Gold */
+    --text-color: #333;
+    --text-light: #666;
+    --bg-color: #F9F9F9;
+    --white: #ffffff;
+    --light-gray: #f4f4f4;
+    --border-color: #e0e0e0;
+
+    /* Fonts */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
