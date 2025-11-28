@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Grandmaster Travel Agency{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem; margin-bottom: 2rem; max-width: 500px;">
+    <h2 class="section-title">Login</h2>
+    <div class="card">
+        <div class="card-content">
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div style="color: red; margin-bottom: 1rem;">
+                    <p>Your username and password didn't match. Please try again.</p>
+                </div>
+                {% endif %}
+
+                <div style="margin-bottom: 1rem;">
+                    <label for="id_username" style="display: block; margin-bottom: 0.5rem;">Username:</label>
+                    {{ form.username }}
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label for="id_password" style="display: block; margin-bottom: 0.5rem;">Password:</label>
+                    {{ form.password }}
+                </div>
+
+                <div style="margin-bottom: 1rem; display: flex; align-items: center;">
+                    <input type="checkbox" name="remember_me" id="remember_me"
+                        style="width: auto; margin-right: 0.5rem;">
+                    <label for="remember_me" style="margin-bottom: 0;">Remember me</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="margin-top: 1rem; text-align: center;">
+                Don't have an account? <a href="{% url 'signup' %}"
+                    style="color: var(--primary-color); font-weight: bold;">Sign up here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Simple styling for form inputs if not already global */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}

@@ -373,11 +373,15 @@
         </nav>
         <div class="auth-buttons">
             {% if user.is_authenticated %}
-            <a href="#" class="btn-login">Dashboard</a>
-            <a href="#" class="btn-signup">Logout</a>
+            <a href="{% url 'dashboard' %}" class="btn-login">Dashboard</a>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-signup"
+                    style="border: none; cursor: pointer; font-size: inherit; font-family: inherit;">Logout</button>
+            </form>
             {% else %}
-            <a href="#" class="btn-login">Login</a>
-            <a href="#" class="btn-signup">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn-login">Login</a>
+            <a href="{% url 'signup' %}" class="btn-signup">Sign Up</a>
             {% endif %}
         </div>
     </header>

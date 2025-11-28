@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Grandmaster Travel Agency{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem; margin-bottom: 2rem; max-width: 500px;">
+    <h2 class="section-title">Sign Up</h2>
+    <div class="card">
+        <div class="card-content">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div style="margin-bottom: 1rem;">
+                    <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem;">{{ field.label
+                        }}:</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small style="color: grey; display: block; margin-top: 0.2rem;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <div style="color: red; font-size: 0.9rem;">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <p style="margin-top: 1rem; text-align: center;">
+                Already have an account? <a href="{% url 'login' %}"
+                    style="color: var(--primary-color); font-weight: bold;">Login here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Simple styling for form inputs */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    ul.errorlist {
+        list-style: none;
+        color: red;
+    }
+</style>
+{% endblock %}
