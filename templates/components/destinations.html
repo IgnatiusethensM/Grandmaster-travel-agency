@@ -1,21 +1,20 @@
-<!-- Destinations Section -->
-<section id="destinations" class="section-padding">
+<section class="section bg-gray" id="destinations">
     <div class="container">
-        <div class="section-header text-center">
-            <h2 class="section-title">Explore Destinations</h2>
-            <p class="section-subtitle">From wildlife safaris to cultural immersions, discover the diverse beauty of
-                Africa</p>
+        <div class="section-header">
+            <h2 class="section-title">Popular Destinations</h2>
+            <p class="section-subtitle">Explore Africa's most captivating locations</p>
         </div>
 
         <div class="destinations-grid">
             {% for dest in destinations %}
             <div class="destination-card">
-                <div class="destination-image">
-                    <img src="{{ dest.image }}" alt="{{ dest.name }}">
-                    <div class="destination-overlay">
-                        <h3>{{ dest.name }}</h3>
-                        <p>{{ dest.description }}</p>
-                    </div>
+                <div class="destination-image-wrapper">
+                    <img src="{{ dest.image }}" alt="{{ dest.name }}" class="destination-image">
+                </div>
+                <div class="destination-overlay"></div>
+                <div class="destination-content">
+                    <h3 class="destination-name">{{ dest.name }}</h3>
+                    <p class="destination-description">{{ dest.description }}</p>
                 </div>
             </div>
             {% endfor %}
