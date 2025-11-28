@@ -1,0 +1,12 @@
+<div class="select-wrapper relative {{ class }}">
+    <select name="{{ name }}" id="{{ id }}"
+        class="form-select flex w-full items-center justify-between gap-2 rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-ring/50 focus:ring-[3px] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 select-{{ size }}"
+        {% if required %}required{% endif %}>
+        <option value="" disabled selected>{{ placeholder }}</option>
+        {% for option in options %}
+        <option value="{{ option.value }}">{{ option.label }}</option>
+        {% endfor %}
+    </select>
+    <i data-lucide="chevron-down"
+        class="select-chevron absolute right-3 top-1/2 -translate-y-1/2 size-4 opacity-50 pointer-events-none"></i>
+</div>
