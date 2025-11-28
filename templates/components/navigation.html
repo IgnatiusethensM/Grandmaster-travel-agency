@@ -1,0 +1,32 @@
+<nav class="nav-fixed">
+    <div class="nav-container">
+        <div class="nav-content">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <h1 class="logo">Grandmaster Tours</h1>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="nav-links-desktop">
+                {% for link in nav_links %}
+                <a href="{{ link.href }}" class="nav-link">{{ link.name }}</a>
+                {% endfor %}
+                <button class="btn-primary">Book Now</button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i data-lucide="menu" class="menu-icon"></i>
+                <i data-lucide="x" class="close-icon hidden"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav hidden" id="mobileNav">
+        {% for link in nav_links %}
+        <a href="{{ link.href }}" class="mobile-nav-link">{{ link.name }}</a>
+        {% endfor %}
+        <button class="btn-primary mobile-book-btn">Book Now</button>
+    </div>
+</nav>

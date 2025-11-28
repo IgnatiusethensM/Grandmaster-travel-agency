@@ -112,6 +112,13 @@ def home(request):
         "Rwanda Gorillas", "Botswana", "Namibia"
     ]
 
+    nav_links = [
+        {"name": "Destinations", "href": "#destinations"},
+        {"name": "Tours", "href": "#tours"},
+        {"name": "About", "href": "#about"},
+        {"name": "Contact", "href": "#contact"}
+    ]
+
     context = {
         "tours": tours,
         "destinations": destinations,
@@ -119,6 +126,7 @@ def home(request):
         "testimonials": testimonials,
         "articles": articles,
         "footer_destinations": footer_destinations,
+        "nav_links": nav_links,
         "year": datetime.now().year
     }
 
