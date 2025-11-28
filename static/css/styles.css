@@ -788,6 +788,187 @@ img {
     border-radius: 0.375rem;
 }
 
+/* =========================================
+   15. Carousel Components
+   ========================================= */
+.carousel-container {
+    overflow: hidden;
+    padding: 1rem 0;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-out;
+}
+
+.carousel-item {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .carousel-item {
+        width: 33.333%;
+    }
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.bg-white {
+    background: var(--white);
+    transform: scale(1.2);
+}
+
+/* Tailwind Utilities used in Testimonials */
+.py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.max-w-7xl {
+    max-width: 80rem;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mb-12 {
+    margin-bottom: 3rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.md\:text-5xl {
+    font-size: 3rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.max-w-2xl {
+    max-width: 42rem;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+
+.w-16 {
+    width: 4rem;
+}
+
+.h-16 {
+    height: 4rem;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.w-4 {
+    width: 1rem;
+}
+
+.h-4 {
+    height: 1rem;
+}
+
+.text-gold {
+    color: var(--secondary-color);
+}
+
+.fill-gold {
+    fill: var(--secondary-color);
+}
+
+.text-gray-700 {
+    color: #374151;
+}
+
+.italic {
+    font-style: italic;
+}
+
 .rounded-xl {
     border-radius: 0.75rem;
 }
