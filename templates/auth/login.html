@@ -8,39 +8,40 @@
     <div class="section-header text-center">
         <h2 class="section-title">Login</h2>
     </div>
-    {% ui_card %}
-    <div class="card-content p-6">
-        <form method="post">
-            {% csrf_token %}
-            {% if form.errors %}
-            <div class="bg-destructive/10 text-destructive p-3 rounded-md mb-4 text-sm">
-                <p>Your username and password didn't match. Please try again.</p>
-            </div>
-            {% endif %}
+    <div class="card bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
+        <div class="card-content p-6">
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="bg-destructive/10 text-destructive p-3 rounded-md mb-4 text-sm">
+                    <p>Your username and password didn't match. Please try again.</p>
+                </div>
+                {% endif %}
 
-            <div class="mb-4">
-                {% ui_label text="Username" for_id="id_username" %}
-                {% ui_input name="username" id="id_username" required=True %}
-            </div>
+                <div class="mb-4">
+                    {% ui_label text="Username" for_id="id_username" %}
+                    {% ui_input name="username" id="id_username" required=True %}
+                </div>
 
-            <div class="mb-4">
-                {% ui_label text="Password" for_id="id_password" %}
-                {% ui_input name="password" type="password" id="id_password" required=True %}
-            </div>
+                <div class="mb-4">
+                    {% ui_label text="Password" for_id="id_password" %}
+                    {% ui_input name="password" type="password" id="id_password" required=True %}
+                </div>
 
-            <div class="flex items-center gap-2 mb-6">
-                <input type="checkbox" name="remember_me" id="remember_me"
-                    class="rounded border-gray-300 text-gold focus:ring-gold">
-                <label for="remember_me" class="text-sm text-gray-700">Remember me</label>
-            </div>
+                <div class="flex items-center gap-2 mb-6">
+                    <input type="checkbox" name="remember_me" id="remember_me"
+                        class="rounded border-gray-300 text-gold focus:ring-gold">
+                    <label for="remember_me" class="text-sm text-gray-700">Remember me</label>
+                </div>
 
-            {% ui_button text="Login" variant="default" css_class="w-full" type="submit" %}
-        </form>
-        <p class="mt-4 text-center text-sm text-gray-600">
-            Don't have an account? <a href="{% url 'signup' %}" class="text-gold font-semibold hover:underline">Sign up
-                here</a>.
-        </p>
+                {% ui_button text="Login" variant="default" css_class="w-full" type="submit" %}
+            </form>
+            <p class="mt-4 text-center text-sm text-gray-600">
+                Don't have an account? <a href="{% url 'signup' %}" class="text-gold font-semibold hover:underline">Sign
+                    up
+                    here</a>.
+            </p>
+        </div>
     </div>
-    {% end_ui_card %}
 </div>
 {% endblock %}
