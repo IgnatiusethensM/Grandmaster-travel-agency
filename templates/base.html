@@ -68,6 +68,19 @@
             });
         }
 
+        // Mobile Dropdown Toggles
+        const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+        mobileDropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdownMenu = toggle.parentElement.nextElementSibling;
+                const icon = toggle.querySelector('i');
+
+                dropdownMenu.classList.toggle('hidden');
+                icon.style.transform = dropdownMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

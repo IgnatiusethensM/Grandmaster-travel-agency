@@ -46,7 +46,23 @@
     <!-- Mobile Navigation -->
     <div class="mobile-nav hidden" id="mobileNav">
         {% for link in nav_links %}
-        <a href="{{ link.href }}" class="mobile-nav-link">{{ link.name }}</a>
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{{ link.href }}" class="mobile-nav-link">{{ link.name }}</a>
+                {% if link.dropdown %}
+                <button class="mobile-dropdown-toggle">
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                {% endif %}
+            </div>
+            {% if link.dropdown %}
+            <div class="mobile-dropdown-menu hidden">
+                {% for item in link.dropdown %}
+                <a href="{{ item.href }}" class="mobile-dropdown-link">{{ item.name }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         {% endfor %}
         <button class="btn-primary mobile-book-btn">Book Now</button>
     </div>

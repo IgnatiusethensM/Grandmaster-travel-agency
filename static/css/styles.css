@@ -14,6 +14,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 h1,
@@ -286,9 +287,9 @@ nav a:hover {
 .mobile-nav {
     position: fixed;
     top: 70px;
-    /* Adjust based on header height */
     left: 0;
     width: 100%;
+    height: calc(100vh - 70px);
     background: var(--white);
     padding: 2rem;
     box-shadow: var(--shadow-md);
@@ -298,22 +299,58 @@ nav a:hover {
     transform: translateY(-150%);
     transition: transform 0.3s ease-in-out;
     z-index: 999;
+    overflow-y: auto;
 }
 
 .mobile-nav.active {
     transform: translateY(0);
 }
 
+.mobile-nav-item {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.mobile-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .mobile-nav-link {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--primary-color);
-    text-align: center;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.mobile-dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--primary-color);
+}
+
+.mobile-dropdown-menu {
+    padding-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.mobile-dropdown-link {
+    font-size: 1rem;
+    color: var(--text-light);
+    display: block;
 }
 
 .mobile-book-btn {
     width: 100%;
     text-align: center;
+    margin-top: 1rem;
 }
 
 .hidden {
