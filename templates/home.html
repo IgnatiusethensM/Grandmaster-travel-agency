@@ -1,73 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+<!-- Hero Section -->
 <section class="hero">
-    <h1>Discover Your Next Adventure</h1>
-    <p>Premium travel experiences tailored just for you.</p>
-
-    <div class="search-widget">
-        <input type="text" placeholder="Where do you want to go?">
-        <input type="date" placeholder="Check-in">
-        <input type="date" placeholder="Check-out">
-        <select>
-            <option value="">Guests</option>
-            <option value="1">1 Guest</option>
-            <option value="2">2 Guests</option>
-            <option value="3">3+ Guests</option>
-        </select>
-        <button class="btn btn-primary">Search</button>
+    <p>Our guides are certified and experienced.</p>
     </div>
-</section>
-
-<section class="container">
-    <h2 class="section-title">Featured Packages</h2>
-    <div class="grid">
-        <!-- Placeholder for packages loop -->
-        <div class="card">
-            <img src="https://via.placeholder.com/400x200" alt="Package Image">
-            <div class="card-content">
-                <h3 class="card-title">Maasai Mara Safari</h3>
-                <span class="card-price">From KES 25,000</span>
-                <p>3 Days / 2 Nights</p>
-                <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">View Details</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://via.placeholder.com/400x200" alt="Package Image">
-            <div class="card-content">
-                <h3 class="card-title">Diani Beach Getaway</h3>
-                <span class="card-price">From KES 35,000</span>
-                <p>5 Days / 4 Nights</p>
-                <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">View Details</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://via.placeholder.com/400x200" alt="Package Image">
-            <div class="card-content">
-                <h3 class="card-title">Dubai Holiday</h3>
-                <span class="card-price">From KES 85,000</span>
-                <p>5 Days / 4 Nights</p>
-                <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">View Details</button>
-            </div>
-        </div>
+    <div style="text-align: center;">
+        <h3>Best Prices</h3>
+        <p>We offer the most competitive rates.</p>
     </div>
-</section>
-
-<section class="container" style="margin-bottom: 4rem;">
-    <h2 class="section-title">Why Choose Us?</h2>
-    <div class="grid">
-        <div style="text-align: center;">
-            <h3>Expert Guides</h3>
-            <p>Our guides are certified and experienced.</p>
-        </div>
-        <div style="text-align: center;">
-            <h3>Best Prices</h3>
-            <p>We offer the most competitive rates.</p>
-        </div>
-        <div style="text-align: center;">
-            <h3>24/7 Support</h3>
-            <p>We are here for you anytime, anywhere.</p>
-        </div>
+    <div style="text-align: center;">
+        <h3>24/7 Support</h3>
+        <p>We are here for you anytime, anywhere.</p>
+    </div>
     </div>
 </section>
 {% endblock %}
