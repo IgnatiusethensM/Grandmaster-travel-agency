@@ -1,26 +1,27 @@
-<!-- Featured Tours Section -->
-<section id="tours" class="section-padding">
+<section class="section bg-white" id="tours">
     <div class="container">
-        <div class="section-header text-center">
-            <h2 class="section-title">Featured Experiences</h2>
-            <p class="section-subtitle">Handpicked itineraries for the discerning traveler</p>
+        <div class="section-header">
+            <h2 class="section-title">Featured Tours</h2>
+            <p class="section-subtitle">Handpicked experiences for the discerning traveler</p>
         </div>
 
         <div class="tours-grid">
             {% for tour in tours %}
             <div class="tour-card">
-                <div class="tour-image">
-                    <img src="{{ tour.image }}" alt="{{ tour.name }}">
-                    <div class="tour-badge">{{ tour.duration }}</div>
+                <div class="tour-image-wrapper">
+                    <img src="{{ tour.image }}" alt="{{ tour.name }}" class="tour-image">
                 </div>
                 <div class="tour-content">
+                    <h3 class="tour-name">{{ tour.name }}</h3>
                     <div class="tour-meta">
-                        <span class="tour-destination">{{ tour.destination }}</span>
-                    </div>
-                    <h3>{{ tour.name }}</h3>
-                    <div class="tour-footer">
-                        <span class="tour-price">From ${{ tour.price }}</span>
-                        <a href="#" class="btn-link">View Details →</a>
+                        <div class="tour-duration">
+                            <i data-lucide="clock" class="icon-sm"></i>
+                            <span>{{ tour.duration }}</span>
+                        </div>
+                        <div class="tour-price">
+                            <i data-lucide="dollar-sign" class="icon-sm"></i>
+                            <span>${{ tour.price }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
