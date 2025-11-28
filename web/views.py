@@ -113,10 +113,13 @@ def home(request):
     ]
 
     nav_links = [
+        {"name": "Home", "href": "/"},
         {"name": "Destinations", "href": "#destinations"},
-        {"name": "Tours", "href": "#tours"},
-        {"name": "About", "href": "#about"},
-        {"name": "Contact", "href": "#contact"}
+        {"name": "Safari Packages", "href": "#safari-packages"},
+        {"name": "Holidays", "href": "#holidays"},
+        {"name": "Corporates", "href": "#corporates"},
+        {"name": "Local Packages", "href": "#local-packages"},
+        {"name": "Blog", "href": "#blog"}
     ]
 
     context = {

@@ -8,9 +8,13 @@
 
             <!-- Desktop Navigation -->
             <div class="nav-links-desktop">
-                {% for link in nav_links %}
-                <a href="{{ link.href }}" class="nav-link">{{ link.name }}</a>
-                {% endfor %}
+                <nav>
+                    <ul>
+                        {% for link in nav_links %}
+                        <li><a href="{{ link.href }}" class="nav-link">{{ link.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
                 <button class="btn-primary">Book Now</button>
             </div>
 
