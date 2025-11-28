@@ -119,12 +119,15 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        lucide.createIcons();
+
         function toggleMobileMenu() {
             const nav = document.querySelector('.main-nav');
             nav.classList.toggle('active');
         }
-        
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

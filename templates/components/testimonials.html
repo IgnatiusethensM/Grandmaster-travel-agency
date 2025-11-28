@@ -1,0 +1,29 @@
+<!-- Testimonials Section -->
+<section class="testimonials-section section-padding bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">What Our Travelers Say</h2>
+            <p class="section-subtitle">Real experiences from real travelers</p>
+        </div>
+
+        <div class="testimonials-grid">
+            {% for testimonial in testimonials %}
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>{{ testimonial.name }}</h4>
+                        <span class="testimonial-location">{{ testimonial.location }}</span>
+                    </div>
+                </div>
+                <div class="testimonial-rating">
+                    {% for i in "12345" %}
+                    <i data-lucide="star" size="16" fill="currentColor" class="text-gold"></i>
+                    {% endfor %}
+                </div>
+                <p class="testimonial-text">"{{ testimonial.text }}"</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
