@@ -1,19 +1,18 @@
-<!-- Features Section -->
-<section class="features-section section-padding bg-dark text-white">
+<section class="section bg-white" id="about">
     <div class="container">
-        <div class="section-header text-center">
-            <h2 class="section-title text-white">Why Choose Grandmaster Tours</h2>
-            <p class="section-subtitle text-gray">We create extraordinary journeys with attention to every detail</p>
+        <div class="section-header">
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-subtitle">What sets Grandmaster Tours apart</p>
         </div>
 
         <div class="features-grid">
             {% for feature in features %}
-            <div class="feature-item">
+            <div class="feature-card">
                 <div class="feature-icon">
-                    <i data-lucide="{{ feature.icon }}" size="48"></i>
+                    <i data-lucide="{{ feature.icon }}" class="icon-lg"></i>
                 </div>
-                <h3>{{ feature.title }}</h3>
-                <p>{{ feature.description }}</p>
+                <h3 class="feature-title">{{ feature.title }}</h3>
+                <p class="feature-description">{{ feature.description }}</p>
             </div>
             {% endfor %}
         </div>
