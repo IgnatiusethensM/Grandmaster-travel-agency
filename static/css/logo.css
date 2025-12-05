@@ -1,0 +1,25 @@
+/* Logo Styles */
+.nav-logo {
+    height: 60px;
+    /* Adjust as needed */
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    /* Optional: rounds corners if it's a boxy image */
+}
+
+.footer-logo {
+    height: 80px;
+    /* Slightly larger in footer */
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav-logo {
+        height: 45px;
+    }
+}

@@ -1,9 +1,12 @@
+{% load static %}
 <nav class="nav-fixed">
     <div class="nav-container">
         <div class="nav-content">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <h1 class="logo">GRANDMASTER TRAVEL AGENCY</h1>
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.jpg' %}" alt="Grandmaster Travel Agency" class="nav-logo">
+                </a>
             </div>
 
             <!-- Desktop Navigation -->
