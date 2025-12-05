@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ package.name }} - Grandmaster Travel Agency{% endblock %}
+
+{% block content %}
+<div class="safari-detail-page">
+    <!-- Hero Section -->
+    <section class="safari-hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ package.image }}');">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="hero-title text-white">{{ package.name }}</h1>
+                <p class="hero-subtitle text-white">{{ package.duration }} • ${{ package.price }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="safari-info text-center mb-5">
+                        <div class="rating mb-3">
+                            <span class="text-warning">★ {{ package.rating }}</span>
+                            <span class="text-muted">({{ package.reviews }} reviews)</span>
+                        </div>
+                        <h2 class="section-title mb-4">Package Overview</h2>
+                        <p class="lead text-muted">{{ package.description }}</p>
+                    </div>
+
+                    <div class="booking-options text-center">
+                        <h3 class="mb-4">Ready for this adventure?</h3>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="{% url 'search_flights' %}?destination={{ package.name }}" class="btn-primary">
+                                <i data-lucide="plane" class="me-2"></i> Book Flights
+                            </a>
+                            <a href="{% url 'search_hotels' %}?location={{ package.name }}" class="btn-primary">
+                                <i data-lucide="bed" class="me-2"></i> Book Hotels
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .safari-hero {
+        height: 60vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -80px;
+        /* Offset fixed header if needed */
+        padding-top: 80px;
+    }
+
+    .gap-3 {
+        gap: 1rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+
+    .text-warning {
+        color: #ffc107;
+    }
+</style>
+{% endblock %}

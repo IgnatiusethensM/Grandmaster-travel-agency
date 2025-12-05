@@ -284,7 +284,9 @@
                             <span style="font-size: 0.85rem; color: var(--text-light);">{{ package.rating }} ({{
                                 package.reviews }} reviews)</span>
                         </div>
-                        <button class="btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">View Details</button>
+                        <a href="{% url 'safari_package_detail' package.slug %}" class="btn-primary btn-sm"
+                            style="width: 100%; margin-top: 1rem; text-decoration: none; display: inline-block; text-align: center;">View
+                            Details</a>
                     </div>
                 </div>
                 {% endfor %}

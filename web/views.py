@@ -48,6 +48,39 @@ DESTINATIONS = [
     }
 ]
 
+SAFARI_PACKAGES = [
+    {
+        "slug": "serengeti-migration",
+        "name": "Serengeti Migration",
+        "duration": "7 Days",
+        "price": 4500,
+        "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+        "rating": 5,
+        "reviews": 124,
+        "description": "Witness the awe-inspiring Great Migration in the Serengeti. This 7-day safari takes you through the heart of the action, with luxury tented camps and expert guides."
+    },
+    {
+        "slug": "masai-mara-big-5",
+        "name": "Masai Mara Big 5",
+        "duration": "5 Days",
+        "price": 3800,
+        "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
+        "rating": 4.9,
+        "reviews": 89,
+        "description": "Search for the Big Five in the world-famous Masai Mara. Enjoy game drives at dawn and dusk, cultural visits to Maasai villages, and sundowners on the plains."
+    },
+    {
+        "slug": "gorilla-trekking",
+        "name": "Gorilla Trekking",
+        "duration": "4 Days",
+        "price": 2800,
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+        "rating": 5,
+        "reviews": 56,
+        "description": "A once-in-a-lifetime opportunity to trek into the rainforests of Rwanda or Uganda to observe mountain gorillas in their natural habitat."
+    }
+]
+
 def home(request):
     context = {
         "nav_links": [
@@ -97,32 +130,7 @@ def home(request):
                 "service": "Custom Itinerary"
             }
         ],
-        "safari_packages": [
-            {
-                "name": "Serengeti Migration",
-                "duration": "7 Days",
-                "price": 4500,
-                "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
-                "rating": 5,
-                "reviews": 124
-            },
-            {
-                "name": "Masai Mara Big 5",
-                "duration": "5 Days",
-                "price": 3800,
-                "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
-                "rating": 4.9,
-                "reviews": 89
-            },
-            {
-                "name": "Gorilla Trekking",
-                "duration": "4 Days",
-                "price": 2800,
-                "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-                "rating": 5,
-                "reviews": 56
-            }
-        ],
+        "safari_packages": SAFARI_PACKAGES,
         "special_offers": [
             {
                 "title": "Christmas in Cape Town",
@@ -166,6 +174,29 @@ def destination_detail(request, slug):
         ]
     }
     return render(request, 'web/destination_detail.html', context)
+
+def safari_package_detail(request, slug):
+    package = next((p for p in SAFARI_PACKAGES if p["slug"] == slug), None)
+    if not package:
+        raise Http404("Safari Package not found")
+    
+    context = {
+        "package": package,
+        "year": datetime.now().year,
+        "nav_links": [
+            {"name": "Home", "href": "/"},
+            {
+                "name": "Blog",
+                "href": "#blog",
+                "dropdown": [
+                    {"name": "Travel Tips", "href": "#"},
+                    {"name": "Wildlife Guide", "href": "#"},
+                    {"name": "Cultural Insights", "href": "#"}
+                ]
+            }
+        ]
+    }
+    return render(request, 'web/safari_detail.html', context)
 
 def safari_packages(request):
     # Data Models (Transferred from Home)
