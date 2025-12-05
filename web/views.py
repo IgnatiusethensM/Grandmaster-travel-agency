@@ -1,5 +1,52 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from datetime import datetime
+from django.http import Http404
+
+# Data Definitions
+DESTINATIONS = [
+    {
+        "slug": "serengeti",
+        "name": "Serengeti",
+        "country": "Tanzania",
+        "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+        "description": "Witness the Great Migration in the vast plains of the Serengeti. Home to the Big Five and millions of wildebeest, it offers the quintessential African safari experience."
+    },
+    {
+        "slug": "maasai-mara",
+        "name": "Maasai Mara",
+        "country": "Kenya",
+        "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
+        "description": "Experience the drama of the wild in Kenya's premier game reserve. Famous for its exceptional population of lions, leopards, and cheetahs, and the annual migration."
+    },
+    {
+        "slug": "zanzibar",
+        "name": "Zanzibar",
+        "country": "Tanzania",
+        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "description": "Relax on pristine white sand beaches and explore the historic Stone Town. Zanzibar offers a perfect blend of culture, history, and tropical paradise."
+    },
+    {
+        "slug": "victoria-falls",
+        "name": "Victoria Falls",
+        "country": "Zimbabwe",
+        "image": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=800&q=80",
+        "description": "Marvel at the 'Smoke that Thunders', one of the Seven Natural Wonders of the World. Enjoy adrenaline-pumping activities or a sunset cruise on the Zambezi."
+    },
+    {
+        "slug": "cape-town",
+        "name": "Cape Town",
+        "country": "South Africa",
+        "image": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=800&q=80",
+        "description": "Discover the vibrant culture and stunning landscapes of the Mother City. From Table Mountain to the Winelands, Cape Town has something for everyone."
+    },
+    {
+        "slug": "kruger-park",
+        "name": "Kruger Park",
+        "country": "South Africa",
+        "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80",
+        "description": "Embark on a self-drive or guided safari in one of Africa's largest game reserves. Kruger National Park is renowned for its diversity of wildlife and accessible wilderness."
+    }
+]
 
 def home(request):
     context = {
@@ -23,14 +70,7 @@ def home(request):
             {"name": "Taxis", "icon": "car", "desc": "Reliable airport transfers & local rides"},
             {"name": "Safaris", "icon": "compass", "desc": "Unforgettable wildlife experiences"}
         ],
-        "destinations": [
-            {"name": "Serengeti", "country": "Tanzania", "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80"},
-            {"name": "Maasai Mara", "country": "Kenya", "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"},
-            {"name": "Zanzibar", "country": "Tanzania", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"},
-            {"name": "Victoria Falls", "country": "Zimbabwe", "image": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=800&q=80"},
-            {"name": "Cape Town", "country": "South Africa", "image": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=800&q=80"},
-            {"name": "Kruger Park", "country": "South Africa", "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80"}
-        ],
+        "destinations": DESTINATIONS,
         "testimonials": [
             {
                 "name": "Sarah Mitchell",
@@ -103,6 +143,29 @@ def home(request):
         ]
     }
     return render(request, 'home.html', context)
+
+def destination_detail(request, slug):
+    destination = next((d for d in DESTINATIONS if d["slug"] == slug), None)
+    if not destination:
+        raise Http404("Destination not found")
+    
+    context = {
+        "destination": destination,
+        "year": datetime.now().year,
+        "nav_links": [
+            {"name": "Home", "href": "/"},
+            {
+                "name": "Blog",
+                "href": "#blog",
+                "dropdown": [
+                    {"name": "Travel Tips", "href": "#"},
+                    {"name": "Wildlife Guide", "href": "#"},
+                    {"name": "Cultural Insights", "href": "#"}
+                ]
+            }
+        ]
+    }
+    return render(request, 'web/destination_detail.html', context)
 
 def safari_packages(request):
     # Data Models (Transferred from Home)

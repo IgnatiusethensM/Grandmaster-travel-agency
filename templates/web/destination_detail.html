@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ destination.name }} - Grandmaster Travel Agency{% endblock %}
+
+{% block content %}
+<div class="destination-detail-page">
+    <!-- Hero Section -->
+    <section class="destination-hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ destination.image }}');">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="hero-title text-white">{{ destination.name }}</h1>
+                <p class="hero-subtitle text-white">{{ destination.country }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="destination-info text-center mb-5">
+                        <h2 class="section-title mb-4">About {{ destination.name }}</h2>
+                        <p class="lead text-muted">{{ destination.description }}</p>
+                    </div>
+
+                    <div class="booking-options text-center">
+                        <h3 class="mb-4">Ready to explore {{ destination.name }}?</h3>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="{% url 'search_flights' %}?destination={{ destination.name }}" class="btn-primary">
+                                <i data-lucide="plane" class="me-2"></i> Book Flights
+                            </a>
+                            <a href="{% url 'search_hotels' %}?location={{ destination.name }}" class="btn-primary">
+                                <i data-lucide="bed" class="me-2"></i> Book Hotels
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .destination-hero {
+        height: 60vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -80px;
+        /* Offset fixed header if needed */
+        padding-top: 80px;
+    }
+
+    .gap-3 {
+        gap: 1rem;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+</style>
+{% endblock %}
