@@ -13,14 +13,14 @@
             <p class="hero-subtitle">Book Flights • Hotels • Trains • Taxis • Safari Packages</p>
 
             <div class="hero-buttons">
-                <button class="btn-primary">Start Your Journey</button>
-                <button class="btn-outline">Explore Destinations</button>
+                <a href="#start-journey" class="btn-primary" style="text-decoration: none;">Start Your Journey</a>
+                <a href="#destinations" class="btn-outline" style="text-decoration: none;">Explore Destinations</a>
             </div>
         </div>
     </section>
 
     <!-- 2. QUICK BOOKING SEARCH BAR -->
-    <div class="search-container">
+    <div class="search-container" id="start-journey">
         <div class="search-box">
             <div class="search-tabs">
                 <button class="search-tab active" onclick="openTab(event, 'flights')">Flights</button>
@@ -157,7 +157,7 @@
     </section>
 
     <!-- 4. DESTINATION SHOWCASE -->
-    <section class="section-padding">
+    <section class="section-padding" id="destinations">
         <div class="container">
             <div class="section-header text-center">
                 <h2 class="section-title">Popular Destinations</h2>
