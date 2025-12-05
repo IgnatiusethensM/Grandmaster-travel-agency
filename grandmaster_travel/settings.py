@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qn7mo^&*74!khl3f7(@$043^rfeng$!yd_65$nzgmyr4v_d00v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'bookings',
     'web',
     'dashboard',
+    'flights',
+    'transfers',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

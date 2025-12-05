@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Confirm Transfer - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Confirm Your Transfer</h1>
+        <p class="page-subtitle">Secure your ride with {{ vehicle.name }}</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Booking Details</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="pickup" value="{{ pickup }}">
+                        <input type="hidden" name="dropoff" value="{{ dropoff }}">
+                        <input type="hidden" name="date" value="{{ date }}">
+                        <input type="hidden" name="time" value="{{ time }}">
+                        <input type="hidden" name="price" value="{{ price }}">
+                        <input type="hidden" name="distance" value="{{ distance }}">
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" value="{{ request.user.email }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Flight Number (Optional)</label>
+                            <input type="text" name="flight_number" class="form-control" placeholder="e.g. KQ123">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Driver Notes</label>
+                            <textarea name="notes" class="form-control" rows="2"
+                                placeholder="Any special instructions..."></textarea>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h4 class="mb-3">Payment Details</h4>
+                        <div class="alert alert-info">
+                            <i data-lucide="info" size="16"></i> This is a mock booking. No payment will be processed.
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-control" placeholder="**** **** **** ****">
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-control" placeholder="123">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 btn-lg">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Trip Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="text-muted small">Vehicle</div>
+                        <div class="fw-bold">{{ vehicle.name }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="text-muted small">Pickup</div>
+                        <div class="fw-bold">{{ pickup }}</div>
+                        <div class="small text-muted">{{ date }} at {{ time }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="text-muted small">Dropoff</div>
+                        <div class="fw-bold">{{ dropoff }}</div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0">Total</span>
+                        <span class="h4 text-primary mb-0">${{ price }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

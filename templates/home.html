@@ -2,12 +2,431 @@
 {% load static %}
 
 {% block content %}
-{% include 'components/hero.html' %}
-{% include 'components/featured_tours.html' %}
-{% include 'components/destinations.html' %}
-{% include 'components/why_choose_us.html' %}
-{% include 'components/testimonials.html' %}
-{% include 'components/booking_form.html' %}
-{% include 'components/blog.html' %}
-{% include 'components/newsletter.html' %}
+<div class="parallax-wrapper">
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section">
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80"
+            alt="African Landscape" class="parallax-bg">
+
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Your Next Adventure with Grandmaster Travel</h1>
+            <p class="hero-subtitle">Book Flights • Hotels • Trains • Taxis • Safari Packages</p>
+
+            <div class="hero-buttons">
+                <button class="btn-primary">Start Your Journey</button>
+                <button class="btn-outline">Explore Destinations</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. QUICK BOOKING SEARCH BAR -->
+    <div class="search-container">
+        <div class="search-box">
+            <div class="search-tabs">
+                <button class="search-tab active" onclick="openTab(event, 'flights')">Flights</button>
+                <button class="search-tab" onclick="openTab(event, 'hotels')">Hotels</button>
+                <button class="search-tab" onclick="openTab(event, 'transfers')">Transfers</button>
+                <button class="search-tab" onclick="openTab(event, 'safaris')">Safaris</button>
+            </div>
+
+            <!-- Flights Form -->
+            <div id="flights" class="search-form active">
+                <form action="{% url 'search_flights' %}" method="GET" class="search-form-grid">
+                    <div class="form-group">
+                        <label class="form-label">From</label>
+                        <input type="text" name="origin" class="form-input" placeholder="City or Airport" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">To</label>
+                        <input type="text" name="destination" class="form-input" placeholder="City or Airport" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Search Flights</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Hotels Form -->
+            <div id="hotels" class="search-form" style="display: none;">
+                <form action="{% url 'hotel_results' %}" method="GET" class="search-form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Destination</label>
+                        <input type="text" name="location" class="form-input" placeholder="City, Hotel, or Area"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Check-in</label>
+                        <input type="date" name="check_in" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Check-out</label>
+                        <input type="date" name="check_out" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Search Hotels</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Transfers Form -->
+            <div id="transfers" class="search-form" style="display: none;">
+                <form action="{% url 'transfer_results' %}" method="GET" class="search-form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Pickup</label>
+                        <input type="text" name="pickup" class="form-input" placeholder="Airport or Address" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dropoff</label>
+                        <input type="text" name="dropoff" class="form-input" placeholder="Destination" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time</label>
+                        <input type="time" name="time" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Search Rides</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Safaris Form -->
+            <div id="safaris" class="search-form" style="display: none;">
+                <div class="text-center">
+                    <h3 class="mb-3">Explore Our Exclusive Safari Packages</h3>
+                    <a href="{% url 'safari_packages' %}" class="btn-primary">View All Packages</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. FEATURED SERVICES SECTION -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive travel solutions for every journey</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="glass-card service-card">
+                    <div class="service-icon">
+                        <i data-lucide="plane" size="32"></i>
+                    </div>
+                    <h3 class="service-name">Flights</h3>
+                    <p class="service-desc">Best deals on international and local flights</p>
+                    <a href="{% url 'search_flights' %}" class="service-link">Book Now <i data-lucide="arrow-right"
+                            size="16"></i></a>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="service-icon">
+                        <i data-lucide="bed" size="32"></i>
+                    </div>
+                    <h3 class="service-name">Hotels</h3>
+                    <p class="service-desc">Luxury stays at affordable rates</p>
+                    <a href="{% url 'search_hotels' %}" class="service-link">Book Now <i data-lucide="arrow-right"
+                            size="16"></i></a>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="service-icon">
+                        <i data-lucide="car" size="32"></i>
+                    </div>
+                    <h3 class="service-name">Transfers</h3>
+                    <p class="service-desc">Reliable airport transfers & local rides</p>
+                    <a href="{% url 'search_transfers' %}" class="service-link">Book Now <i data-lucide="arrow-right"
+                            size="16"></i></a>
+                </div>
+                <div class="glass-card service-card">
+                    <div class="service-icon">
+                        <i data-lucide="compass" size="32"></i>
+                    </div>
+                    <h3 class="service-name">Safaris</h3>
+                    <p class="service-desc">Unforgettable wildlife experiences</p>
+                    <a href="{% url 'safari_packages' %}" class="service-link">Explore <i data-lucide="arrow-right"
+                            size="16"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DESTINATION SHOWCASE -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-subtitle">Explore the most breathtaking places in Africa</p>
+            </div>
+
+            <div class="destinations-grid">
+                {% for dest in destinations %}
+                <div class="destination-card">
+                    <div class="destination-image-wrapper">
+                        <img src="{{ dest.image }}" alt="{{ dest.name }}" class="destination-image">
+                        <div class="destination-overlay"></div>
+                    </div>
+                    <div class="destination-content">
+                        <h3 class="destination-name">{{ dest.name }}</h3>
+                        <p class="destination-country">{{ dest.country }}</p>
+                        <button class="btn-primary btn-sm">View Details</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY CHOOSE GRANDMASTER -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Why Choose Grandmaster</h2>
+                <p class="section-subtitle">Excellence in every detail of your journey</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="tag" size="32"></i>
+                    </div>
+                    <h3 class="feature-title">Best Prices</h3>
+                    <p class="feature-description">We guarantee competitive rates and exclusive deals on all bookings.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="headset" size="32"></i>
+                    </div>
+                    <h3 class="feature-title">24/7 Support</h3>
+                    <p class="feature-description">Our dedicated team is available round the clock to assist you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check" size="32"></i>
+                    </div>
+                    <h3 class="feature-title">Secure Booking</h3>
+                    <p class="feature-description">Your data and payments are protected with top-tier security.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="star" size="32"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Guides</h3>
+                    <p class="feature-description">Travel with experienced professionals who know Africa best.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TESTIMONIALS -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">What Our Travelers Say</h2>
+                <p class="section-subtitle">Real experiences from our valued guests</p>
+            </div>
+
+            <div class="testimonials-grid">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
+                        <div>
+                            <h4 class="testimonial-name">{{ testimonial.name }}</h4>
+                            <p class="testimonial-location">{{ testimonial.location }}</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        {% for i in "12345"|make_list %}
+                        <i data-lucide="star" size="16" class="fill-current text-yellow-400"></i>
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.text }}"</p>
+                    <span class="testimonial-tag">{{ testimonial.service }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SAFARI PACKAGES SHOWCASE -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Exclusive Safari Packages</h2>
+                <p class="section-subtitle">Curated wildlife experiences for the adventurous soul</p>
+            </div>
+
+            <div class="services-grid">
+                {% for package in safari_packages %}
+                <div class="safari-card">
+                    <div class="safari-badge">Best Seller</div>
+                    <img src="{{ package.image }}" alt="{{ package.name }}" class="safari-image">
+                    <div class="safari-content">
+                        <h3 class="service-name">{{ package.name }}</h3>
+                        <div class="tour-meta">
+                            <div class="tour-duration">
+                                <i data-lucide="clock" size="16"></i>
+                                <span>{{ package.duration }}</span>
+                            </div>
+                            <div class="tour-price">
+                                <span>${{ package.price }}</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating" style="margin-top: 0.5rem;">
+                            <i data-lucide="star" size="14" class="fill-current text-yellow-400"></i>
+                            <span style="font-size: 0.85rem; color: var(--text-light);">{{ package.rating }} ({{
+                                package.reviews }} reviews)</span>
+                        </div>
+                        <button class="btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">View Details</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. SPECIAL OFFERS -->
+    <section class="section-padding offers-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title text-white">Limited Time Offers</h2>
+                <p class="section-subtitle text-gray">Grab these deals before they expire</p>
+            </div>
+
+            <div class="offers-grid">
+                {% for offer in special_offers %}
+                <div class="offer-card">
+                    <img src="{{ offer.image }}" alt="{{ offer.title }}" class="offer-image">
+                    <div class="offer-content">
+                        <div class="offer-discount">{{ offer.discount }}</div>
+                        <h3 class="service-name">{{ offer.title }}</h3>
+                        <div class="tour-price" style="margin: 0.5rem 0;">
+                            <span
+                                style="text-decoration: line-through; color: var(--text-light); font-size: 0.9rem;">${{
+                                offer.original_price }}</span>
+                            <span style="color: var(--accent-color); font-size: 1.25rem;">${{ offer.price }}</span>
+                        </div>
+                        <p
+                            style="color: var(--accent-color); font-weight: 600; font-size: 0.85rem; margin-bottom: 1rem;">
+                            Ends in: {{ offer.expiry }}</p>
+                        <button class="btn-primary btn-sm" style="width: 100%;">Claim Offer</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. HOW IT WORKS -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Your journey begins with 4 simple steps</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="steps-line"></div>
+                <div class="step-item">
+                    <div class="step-icon">1</div>
+                    <h3 class="feature-title">Search</h3>
+                    <p class="feature-description">Find your perfect destination</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">2</div>
+                    <h3 class="feature-title">Compare</h3>
+                    <p class="feature-description">Choose the best options</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">3</div>
+                    <h3 class="feature-title">Book</h3>
+                    <p class="feature-description">Secure your reservation</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">4</div>
+                    <h3 class="feature-title">Travel</h3>
+                    <p class="feature-description">Enjoy your adventure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. NEWSLETTER -->
+    <section class="section-padding newsletter-section">
+        <div class="container">
+            <h2 class="section-title text-white">Get Travel Inspiration & Exclusive Deals</h2>
+            <p class="section-subtitle text-gray">Join our community of travelers and save on your next trip.</p>
+
+            <form class="newsletter-form">
+                <input type="email" class="form-input" placeholder="Enter your email" style="flex-grow: 1;">
+                <button class="btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 11. FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h1 class="logo" style="color: var(--white); margin-bottom: 1rem;">GRANDMASTER</h1>
+                    <p style="color: #94A3B8; line-height: 1.6;">Crafting unforgettable African journeys with attention
+                        to every detail. Your trusted partner in travel.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Packages</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Flights</a></li>
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Safaris</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">info@grandmastertravel.com</a></li>
+                        <li><a href="#">+1 (555) 123-4567</a></li>
+                        <li><a href="#">Nairobi, Kenya</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ year }} GRANDMASTER TRAVEL AGENCY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("search-form");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("search-tab");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 {% endblock %}

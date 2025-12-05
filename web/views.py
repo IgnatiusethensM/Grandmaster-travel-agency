@@ -2,7 +2,158 @@ from django.shortcuts import render
 from datetime import datetime
 
 def home(request):
-    # Data Models (Hardcoded for Design Match)
+    context = {
+        "nav_links": [
+            {"name": "Home", "href": "/"},
+            {
+                "name": "Destinations",
+                "href": "#destinations",
+                "dropdown": [
+                    {"name": "Kenya", "href": "#"},
+                    {"name": "Tanzania", "href": "#"},
+                    {"name": "South Africa", "href": "#"},
+                    {"name": "Rwanda", "href": "#"},
+                    {"name": "Uganda", "href": "#"}
+                ]
+            },
+            {
+                "name": "Safari Packages",
+                "href": "/safari-packages/",
+                "dropdown": [
+                    {"name": "Luxury Safaris", "href": "#"},
+                    {"name": "Budget Camping", "href": "#"},
+                    {"name": "Family Safaris", "href": "#"},
+                    {"name": "Honeymoon Specials", "href": "#"}
+                ]
+            },
+            {
+                "name": "Holidays",
+                "href": "#holidays",
+                "dropdown": [
+                    {"name": "Christmas Deals", "href": "#"},
+                    {"name": "Easter Getaways", "href": "#"},
+                    {"name": "Summer Vacations", "href": "#"}
+                ]
+            },
+            {
+                "name": "Corporates",
+                "href": "#corporates",
+                "dropdown": [
+                    {"name": "Team Building", "href": "#"},
+                    {"name": "Conferences", "href": "#"},
+                    {"name": "Incentive Travel", "href": "#"}
+                ]
+            },
+            {
+                "name": "Local Packages",
+                "href": "#local-packages",
+                "dropdown": [
+                    {"name": "Weekend Getaways", "href": "#"},
+                    {"name": "Day Trips", "href": "#"},
+                    {"name": "Staycations", "href": "#"}
+                ]
+            },
+            {
+                "name": "Blog",
+                "href": "#blog",
+                "dropdown": [
+                    {"name": "Travel Tips", "href": "#"},
+                    {"name": "Wildlife Guide", "href": "#"},
+                    {"name": "Cultural Insights", "href": "#"}
+                ]
+            }
+        ],
+        "year": datetime.now().year,
+        "featured_services": [
+            {"name": "Flights", "icon": "plane", "desc": "Best deals on international flights"},
+            {"name": "Hotels", "icon": "bed", "desc": "Luxury stays at affordable rates"},
+            {"name": "Trains", "icon": "train", "desc": "Scenic rail journeys across Africa"},
+            {"name": "Taxis", "icon": "car", "desc": "Reliable airport transfers & local rides"},
+            {"name": "Safaris", "icon": "compass", "desc": "Unforgettable wildlife experiences"}
+        ],
+        "destinations": [
+            {"name": "Serengeti", "country": "Tanzania", "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80"},
+            {"name": "Maasai Mara", "country": "Kenya", "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"},
+            {"name": "Zanzibar", "country": "Tanzania", "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"},
+            {"name": "Victoria Falls", "country": "Zimbabwe", "image": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=800&q=80"},
+            {"name": "Cape Town", "country": "South Africa", "image": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=800&q=80"},
+            {"name": "Kruger Park", "country": "South Africa", "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80"}
+        ],
+        "testimonials": [
+            {
+                "name": "Sarah Mitchell",
+                "location": "London, UK",
+                "rating": 5,
+                "text": "Our Serengeti safari exceeded all expectations. The guides were incredibly knowledgeable.",
+                "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+                "service": "Safari Package"
+            },
+            {
+                "name": "James Cooper",
+                "location": "New York, USA",
+                "rating": 5,
+                "text": "The gorilla trekking experience in Rwanda was life-changing. Absolutely worth it!",
+                "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+                "service": "Adventure Tour"
+            },
+            {
+                "name": "Emma Thompson",
+                "location": "Sydney, Australia",
+                "rating": 5,
+                "text": "From the Victoria Falls to the Okavango Delta, every moment was magical.",
+                "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+                "service": "Custom Itinerary"
+            }
+        ],
+        "safari_packages": [
+            {
+                "name": "Serengeti Migration",
+                "duration": "7 Days",
+                "price": 4500,
+                "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+                "rating": 5,
+                "reviews": 124
+            },
+            {
+                "name": "Masai Mara Big 5",
+                "duration": "5 Days",
+                "price": 3800,
+                "image": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80",
+                "rating": 4.9,
+                "reviews": 89
+            },
+            {
+                "name": "Gorilla Trekking",
+                "duration": "4 Days",
+                "price": 2800,
+                "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
+                "rating": 5,
+                "reviews": 56
+            }
+        ],
+        "special_offers": [
+            {
+                "title": "Christmas in Cape Town",
+                "discount": "20% OFF",
+                "price": 1200,
+                "original_price": 1500,
+                "image": "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=800&q=80",
+                "expiry": "2 Days Left"
+            },
+            {
+                "title": "Zanzibar Beach Escape",
+                "discount": "15% OFF",
+                "price": 950,
+                "original_price": 1100,
+                "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+                "expiry": "5 Days Left"
+            }
+        ]
+    }
+    return render(request, 'home.html', context)
+
+def safari_packages(request):
+    # Data Models (Transferred from Home)
     tours = [
         {
             "id": 1,
@@ -127,7 +278,7 @@ def home(request):
         },
         {
             "name": "Safari Packages",
-            "href": "#safari-packages",
+            "href": "/safari-packages/",
             "dropdown": [
                 {"name": "Luxury Safaris", "href": "#"},
                 {"name": "Budget Camping", "href": "#"},
@@ -190,5 +341,4 @@ def home(request):
         ],
         "year": datetime.now().year
     }
-
-    return render(request, 'home.html', context)
+    return render(request, 'web/safari_packages.html', context)

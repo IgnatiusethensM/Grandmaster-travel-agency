@@ -3,13 +3,25 @@
         <div class="nav-content">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <h1 class="logo">Grandmaster Tours</h1>
+                <h1 class="logo">GRANDMASTER TRAVEL AGENCY</h1>
             </div>
 
             <!-- Desktop Navigation -->
             <div class="nav-links-desktop">
                 <nav>
                     <ul>
+                        <li class="nav-item">
+                            <a href="{% url 'search_flights' %}" class="nav-link">Flights</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'search_hotels' %}" class="nav-link">Hotels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'search_transfers' %}" class="nav-link">Transfers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'safari_packages' %}" class="nav-link">Safaris</a>
+                        </li>
                         {% for link in nav_links %}
                         <li class="nav-item {% if link.dropdown %}has-dropdown{% endif %}">
                             <a href="{{ link.href }}" class="nav-link">
@@ -45,6 +57,26 @@
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'search_flights' %}" class="mobile-nav-link">Flights</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'search_hotels' %}" class="mobile-nav-link">Hotels</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'search_transfers' %}" class="mobile-nav-link">Transfers</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'safari_packages' %}" class="mobile-nav-link">Safaris</a>
+            </div>
+        </div>
         {% for link in nav_links %}
         <div class="mobile-nav-item">
             <div class="mobile-nav-header">

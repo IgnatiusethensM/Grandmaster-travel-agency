@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Hotel - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Complete Your Reservation</h1>
+        <p class="page-subtitle">Secure your stay at {{ name|default:hotel.name }}</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Guest Details</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="hotel_name" value="{{ name|default:hotel.name }}">
+                        <input type="hidden" name="check_in" value="{{ check_in }}">
+                        <input type="hidden" name="check_out" value="{{ check_out }}">
+                        <input type="hidden" name="guests" value="{{ guests }}">
+                        <input type="hidden" name="price" value="{{ price|default:hotel.price_per_night }}">
+                        <!-- Calculate total price roughly (mock logic in template for display, real logic should be backend/JS) -->
+                        <input type="hidden" name="total_price" value="{{ price|default:hotel.price_per_night }}">
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" value="{{ request.user.email }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Special Requests</label>
+                            <textarea name="special_requests" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h4 class="mb-3">Payment Details</h4>
+                        <div class="alert alert-info">
+                            <i data-lucide="info" size="16"></i> This is a mock booking. No payment will be processed.
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" class="form-control" placeholder="**** **** **** ****">
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-control" placeholder="123">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 btn-lg">Confirm Reservation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Booking Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Hotel</span>
+                        <span class="fw-bold text-end">{{ name|default:hotel.name }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Check-in</span>
+                        <span class="fw-bold">{{ check_in }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Check-out</span>
+                        <span class="fw-bold">{{ check_out }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Guests</span>
+                        <span class="fw-bold">{{ guests }} Adults</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0">Total (1 Night)</span>
+                        <span class="h4 text-primary mb-0">${{ price|default:hotel.price_per_night }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

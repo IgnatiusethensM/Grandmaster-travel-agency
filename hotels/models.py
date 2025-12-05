@@ -6,6 +6,7 @@ class Hotel(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     location = models.CharField(max_length=200)
     stars = models.PositiveIntegerField(default=3)
+    rating = models.FloatField(default=0.0)
     amenities = models.JSONField(default=list)
     description = models.TextField()
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)

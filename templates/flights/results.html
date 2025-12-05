@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Flight Results - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Flight Results</h1>
+        <p class="page-subtitle">{{ origin }} to {{ destination }} on {{ date }}</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="row">
+        <!-- Sidebar Filters (Placeholder) -->
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Filters</h5>
+                    <hr>
+                    <div class="mb-3">
+                        <label class="form-label">Price Range</label>
+                        <input type="range" class="form-range" min="0" max="2000">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Airlines</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label">All Airlines</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results List -->
+        <div class="col-md-9">
+            {% if flights %}
+            {% for flight in flights %}
+            <div class="card mb-3 flight-card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <img src="{{ flight.airline.logo }}" alt="{{ flight.airline.name }}"
+                                style="max-width: 60px;">
+                            <div class="small text-muted mt-1">{{ flight.airline.name }}</div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="h4 mb-0">{{ flight.departure_time|date:"H:i" }}</div>
+                            <div class="small text-muted">{{ flight.origin.code }}</div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="small text-muted">{{ flight.duration }}</div>
+                            <hr class="my-1">
+                            <div class="small text-muted">Direct</div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="h4 mb-0">{{ flight.arrival_time|date:"H:i" }}</div>
+                            <div class="small text-muted">{{ flight.destination.code }}</div>
+                            <div class="small text-success">+1 Day</div> <!-- Mocking next day arrival if needed -->
+                        </div>
+                        <div class="col-md-2 text-center border-start">
+                            <div class="h3 text-primary mb-2">${{ flight.price }}</div>
+                            <a href="{% url 'book_flight' flight.id %}" class="btn btn-primary btn-sm w-100">Select</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-info">
+                No flights found for your search criteria. Please try different dates.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .flight-card {
+        transition: transform 0.2s;
+        border: 1px solid #e2e8f0;
+    }
+
+    .flight-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+</style>
+{% endblock %}

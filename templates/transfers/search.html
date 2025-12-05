@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Airport Transfer - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Reliable Airport Transfers</h1>
+        <p class="page-subtitle">Comfortable rides to and from your destination</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="search-box" style="margin-top: 0;">
+        <form method="GET" action="{% url 'transfer_results' %}" class="search-form-grid">
+            <div class="form-group">
+                <label class="form-label">Pickup Location</label>
+                <input type="text" name="pickup" class="form-input" placeholder="Airport, Hotel, or Address" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Dropoff Location</label>
+                <input type="text" name="dropoff" class="form-input" placeholder="Destination Address" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="date" name="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Time</label>
+                <input type="time" name="time" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passengers</label>
+                <select name="passengers" class="form-input">
+                    <option value="1">1-3 Passengers</option>
+                    <option value="4">4-6 Passengers</option>
+                    <option value="7">7+ Passengers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-primary" style="width: 100%;">Search Rides</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

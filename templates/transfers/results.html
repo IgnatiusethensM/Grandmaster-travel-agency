@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Select Vehicle - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Choose Your Ride</h1>
+        <p class="page-subtitle">{{ pickup }} to {{ dropoff }}</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            {% if results %}
+            {% for item in results %}
+            <div class="card mb-4 transfer-card">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="{{ item.vehicle.image }}" class="img-fluid rounded-start h-100 object-fit-cover"
+                            alt="{{ item.vehicle.name }}" style="max-height: 200px; width: 100%;">
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">{{ item.vehicle.name }}</h4>
+                            <p class="text-muted mb-3">{{ item.vehicle.description }}</p>
+                            <div class="d-flex gap-3 text-muted small">
+                                <span><i data-lucide="users" size="14"></i> Max {{ item.vehicle.capacity }} Pax</span>
+                                <span><i data-lucide="briefcase" size="14"></i> {{ item.vehicle.capacity }} Bags</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 border-start">
+                        <div class="card-body text-center">
+                            <div class="h3 text-primary mb-0">${{ item.estimated_price }}</div>
+                            <div class="small text-muted mb-3">Est. Price</div>
+                            <a href="{% url 'book_transfer' item.vehicle.id %}?pickup={{ pickup }}&dropoff={{ dropoff }}&date={{ date }}&time={{ time }}&price={{ item.estimated_price }}&distance={{ item.distance }}"
+                                class="btn btn-primary w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-info">
+                No vehicles available for your selection.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

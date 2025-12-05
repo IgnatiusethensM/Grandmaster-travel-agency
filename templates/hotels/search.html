@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Hotels - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Find Your Perfect Stay</h1>
+        <p class="page-subtitle">Luxury hotels, resorts, and apartments worldwide</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="search-box" style="margin-top: 0;">
+        <form method="GET" action="{% url 'hotel_results' %}" class="search-form-grid">
+            <div class="form-group">
+                <label class="form-label">Destination</label>
+                <input type="text" name="location" class="form-input" placeholder="City, Hotel, or Area" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Check-in</label>
+                <input type="date" name="check_in" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Check-out</label>
+                <input type="date" name="check_out" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Guests</label>
+                <select name="guests" class="form-input">
+                    <option value="1">1 Adult</option>
+                    <option value="2">2 Adults</option>
+                    <option value="3">3 Adults</option>
+                    <option value="4">4+ Adults</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-primary" style="width: 100%;">Search Hotels</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

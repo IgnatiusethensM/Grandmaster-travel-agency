@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Flights - Grandmaster Travel{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');">
+    <div class="container">
+        <h1 class="page-title">Search Flights</h1>
+        <p class="page-subtitle">Find the best deals for your next journey</p>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="search-box" style="margin-top: 0;">
+        <form method="GET" action="{% url 'search_flights' %}" class="search-form-grid">
+            <div class="form-group">
+                <label class="form-label">From</label>
+                <input type="text" name="origin" class="form-input" placeholder="City or Airport (e.g. JFK)" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">To</label>
+                <input type="text" name="destination" class="form-input" placeholder="City or Airport (e.g. LHR)"
+                    required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Departure Date</label>
+                <input type="date" name="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Passengers</label>
+                <select name="passengers" class="form-input">
+                    <option value="1">1 Passenger</option>
+                    <option value="2">2 Passengers</option>
+                    <option value="3">3 Passengers</option>
+                    <option value="4">4+ Passengers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-primary" style="width: 100%;">Search Flights</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
