@@ -9,7 +9,7 @@
             {% for tour in tours %}
             <div class="tour-card">
                 <div class="tour-image-wrapper">
-                    <img src="{% if tour.images.first %}{{ tour.images.first.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                    <img src="{% if tour.images.first %}{{ tour.images.first.get_image_url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
                         alt="{{ tour.title }}" class="tour-image">
                 </div>
                 <div class="tour-content">

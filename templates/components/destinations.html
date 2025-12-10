@@ -9,7 +9,7 @@
             {% for dest in destinations %}
             <div class="destination-card">
                 <div class="destination-image-wrapper">
-                    <img src="{% if dest.hero_image %}{{ dest.hero_image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                    <img src="{% if dest.get_image_url %}{{ dest.get_image_url }}{% else %}https://via.placeholder.com/400x300{% endif %}"
                         alt="{{ dest.name }}" class="destination-image">
                 </div>
                 <div class="destination-overlay"></div>

@@ -6,12 +6,14 @@
 {% block content %}
 <div class="safari-detail-page">
     <!-- Hero Section -->
-    <section class="safari-hero"
-        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ package.image }}');">
-        <div class="container">
-            <div class="hero-content text-center">
-                <h1 class="hero-title text-white">{{ package.name }}</h1>
-                <p class="hero-subtitle text-white">{{ package.duration }} • ${{ package.price }}</p>
+    <section class="safari-hero">
+        <div class="hero"
+            style="background-image: url('{% if package.images.first %}{{ package.images.first.get_image_url }}{% else %}https://via.placeholder.com/1200x600{% endif %}');">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="hero-title text-white">{{ package.name }}</h1>
+                    <p class="hero-subtitle text-white">{{ package.duration }} • ${{ package.price }}</p>
+                </div>
             </div>
         </div>
     </section>
