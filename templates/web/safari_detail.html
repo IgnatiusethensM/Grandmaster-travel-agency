@@ -33,11 +33,9 @@
                     <div class="booking-options text-center">
                         <h3 class="mb-4">Ready for this adventure?</h3>
                         <div class="d-flex justify-content-center gap-3 flex-wrap">
-                            <a href="{% url 'search_flights' %}?destination={{ package.name }}" class="btn-primary">
-                                <i data-lucide="plane" class="me-2"></i> Book Flights
-                            </a>
-                            <a href="{% url 'search_hotels' %}?location={{ package.name }}" class="btn-primary">
-                                <i data-lucide="bed" class="me-2"></i> Book Hotels
+                            <a href="{% url 'book_package' package.id %}" class="btn-primary"
+                                style="padding: 0.75rem 2rem; font-size: 1.1rem;">
+                                <i data-lucide="calendar" class="me-2"></i> Book This Safari
                             </a>
                         </div>
                     </div>

@@ -27,5 +27,7 @@ urlpatterns = [
     path('hotels/', include('hotels.urls')),
     path('flights/', include('flights.urls')),
     path('transfers/', include('transfers.urls')),
+    path('dashboard/', include('dashboard.urls')),
+    path('bookings/', include('bookings.urls')),
     path('', include('web.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

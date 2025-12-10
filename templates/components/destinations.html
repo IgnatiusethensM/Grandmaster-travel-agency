@@ -9,12 +9,15 @@
             {% for dest in destinations %}
             <div class="destination-card">
                 <div class="destination-image-wrapper">
-                    <img src="{{ dest.image }}" alt="{{ dest.name }}" class="destination-image">
+                    <img src="{% if dest.hero_image %}{{ dest.hero_image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                        alt="{{ dest.name }}" class="destination-image">
                 </div>
                 <div class="destination-overlay"></div>
                 <div class="destination-content">
                     <h3 class="destination-name">{{ dest.name }}</h3>
-                    <p class="destination-description">{{ dest.description }}</p>
+                    <p class="destination-description">{{ dest.description|truncatewords:20 }}</p>
+                    <a href="{% url 'destination_detail' dest.slug %}" class="btn-primary btn-sm"
+                        style="margin-top: 1rem; display: inline-block;">View Details</a>
                 </div>
             </div>
             {% endfor %}

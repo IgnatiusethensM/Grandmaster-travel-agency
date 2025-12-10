@@ -14,9 +14,7 @@
             <div class="nav-links-desktop">
                 <nav>
                     <ul>
-                        <li class="nav-item">
-                            <a href="{% url 'search_flights' %}" class="nav-link">Flights</a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="{% url 'search_hotels' %}" class="nav-link">Hotels</a>
                         </li>
@@ -46,6 +44,37 @@
                             {% endif %}
                         </li>
                         {% endfor %}
+
+                        <!-- Auth Links -->
+                        {% if user.is_authenticated %}
+                        <li class="nav-item has-dropdown">
+                            <a href="#" class="nav-link text-gold font-semibold">
+                                <i data-lucide="user" class="icon-sm me-1"></i> Account
+                                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-bg-animation"></div>
+                                <ul class="dropdown-list">
+                                    <li><a href="{% url 'dashboard' %}" class="dropdown-link">My Dashboard</a></li>
+                                    {% if user.is_staff %}
+                                    <li><a href="{% url 'staff_dashboard' %}" class="dropdown-link text-warning">Staff
+                                            Dashboard</a></li>
+                                    {% endif %}
+                                    <li>
+                                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dropdown-link"
+                                                style="background: none; border: none; width: 100%; text-align: left; cursor: pointer;">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}" class="btn-primary btn-sm" style="margin-left: 1rem;">Login</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -60,11 +89,7 @@
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-item">
-            <div class="mobile-nav-header">
-                <a href="{% url 'search_flights' %}" class="mobile-nav-link">Flights</a>
-            </div>
-        </div>
+
         <div class="mobile-nav-item">
             <div class="mobile-nav-header">
                 <a href="{% url 'search_hotels' %}" class="mobile-nav-link">Hotels</a>
@@ -99,5 +124,37 @@
             {% endif %}
         </div>
         {% endfor %}
+
+        <!-- Mobile Auth -->
+        {% if user.is_authenticated %}
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'dashboard' %}" class="mobile-nav-link">My Dashboard</a>
+            </div>
+        </div>
+        {% if user.is_staff %}
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'staff_dashboard' %}" class="mobile-nav-link text-warning">Staff Dashboard</a>
+            </div>
+        </div>
+        {% endif %}
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <form action="{% url 'logout' %}" method="post" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit" class="mobile-nav-link w-full text-left"
+                        style="background: none; border: none; padding: 1rem 1.5rem; color: var(--primary-color);">Logout</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="mobile-nav-item">
+            <div class="mobile-nav-header">
+                <a href="{% url 'login' %}" class="mobile-nav-link" style="color: var(--secondary-color);">Login / Sign
+                    Up</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </nav>

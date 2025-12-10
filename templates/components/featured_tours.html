@@ -9,19 +9,24 @@
             {% for tour in tours %}
             <div class="tour-card">
                 <div class="tour-image-wrapper">
-                    <img src="{{ tour.image }}" alt="{{ tour.name }}" class="tour-image">
+                    <img src="{% if tour.images.first %}{{ tour.images.first.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                        alt="{{ tour.title }}" class="tour-image">
                 </div>
                 <div class="tour-content">
-                    <h3 class="tour-name">{{ tour.name }}</h3>
+                    <h3 class="tour-name">{{ tour.title }}</h3>
                     <div class="tour-meta">
                         <div class="tour-duration">
                             <i data-lucide="clock" class="icon-sm"></i>
-                            <span>{{ tour.duration }}</span>
+                            <span>{{ tour.duration_days }} Days</span>
                         </div>
                         <div class="tour-price">
                             <i data-lucide="dollar-sign" class="icon-sm"></i>
                             <span>${{ tour.price }}</span>
                         </div>
+                    </div>
+                    <div class="tour-action">
+                        <a href="{% url 'package_detail' tour.slug %}" class="btn-primary btn-sm"
+                            style="width: 100%; display: block; text-align: center; margin-top: 1rem;">View Details</a>
                     </div>
                 </div>
             </div>
