@@ -103,7 +103,6 @@ def home(request):
         ],
         "year": datetime.now().year,
         "featured_services": [
-            {"name": "Flights", "icon": "plane", "desc": "Best deals on international flights"},
             {"name": "Hotels", "icon": "bed", "desc": "Luxury stays at affordable rates"},
             {"name": "Trains", "icon": "train", "desc": "Scenic rail journeys across Africa"},
             {"name": "Taxis", "icon": "car", "desc": "Reliable airport transfers & local rides"},

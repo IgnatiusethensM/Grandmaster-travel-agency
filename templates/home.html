@@ -10,7 +10,7 @@
 
         <div class="hero-content">
             <h1 class="hero-title">Discover Your Next Adventure with Grandmaster Travel</h1>
-            <p class="hero-subtitle">Book Flights • Hotels • Trains • Taxis • Safari Packages</p>
+            <p class="hero-subtitle">Hotels • Trains • Taxis • Safari Packages</p>
 
             <div class="hero-buttons">
                 <a href="#start-journey" class="btn-primary" style="text-decoration: none;">Start Your Journey</a>
@@ -23,31 +23,17 @@
     <div class="search-container" id="start-journey">
         <div class="search-box">
             <div class="search-tabs">
-                <button class="search-tab active" onclick="openTab(event, 'flights')">Flights</button>
+                <button class="search-tab active" onclick="openTab(event, 'safaris')">Safaris</button>
                 <button class="search-tab" onclick="openTab(event, 'hotels')">Hotels</button>
                 <button class="search-tab" onclick="openTab(event, 'transfers')">Transfers</button>
-                <button class="search-tab" onclick="openTab(event, 'safaris')">Safaris</button>
             </div>
 
-            <!-- Flights Form -->
-            <div id="flights" class="search-form active">
-                <form action="{% url 'search_flights' %}" method="GET" class="search-form-grid">
-                    <div class="form-group">
-                        <label class="form-label">From</label>
-                        <input type="text" name="origin" class="form-input" placeholder="City or Airport" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">To</label>
-                        <input type="text" name="destination" class="form-input" placeholder="City or Airport" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Date</label>
-                        <input type="date" name="date" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn-primary" style="width: 100%;">Search Flights</button>
-                    </div>
-                </form>
+            <!-- Safaris Form (Default Active) -->
+            <div id="safaris" class="search-form active" style="display: block;">
+                <div class="text-center">
+                    <h3 class="mb-3">Explore Our Exclusive Safari Packages</h3>
+                    <a href="{% url 'safari_packages' %}" class="btn-primary">View All Packages</a>
+                </div>
             </div>
 
             <!-- Hotels Form -->
@@ -96,14 +82,6 @@
                     </div>
                 </form>
             </div>
-
-            <!-- Safaris Form -->
-            <div id="safaris" class="search-form" style="display: none;">
-                <div class="text-center">
-                    <h3 class="mb-3">Explore Our Exclusive Safari Packages</h3>
-                    <a href="{% url 'safari_packages' %}" class="btn-primary">View All Packages</a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -116,15 +94,7 @@
             </div>
 
             <div class="services-grid">
-                <div class="glass-card service-card">
-                    <div class="service-icon">
-                        <i data-lucide="plane" size="32"></i>
-                    </div>
-                    <h3 class="service-name">Flights</h3>
-                    <p class="service-desc">Best deals on international and local flights</p>
-                    <a href="{% url 'search_flights' %}" class="service-link">Book Now <i data-lucide="arrow-right"
-                            size="16"></i></a>
-                </div>
+                <!-- Flights card removed -->
                 <div class="glass-card service-card">
                     <div class="service-icon">
                         <i data-lucide="bed" size="32"></i>
