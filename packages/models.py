@@ -27,7 +27,7 @@ class Destination(models.Model):
 
     @property
     def get_image_url(self):
-        if self.hero_image:
+        if self.hero_image and self.hero_image.name:
             return self.hero_image.url
         return self.hero_image_url
 

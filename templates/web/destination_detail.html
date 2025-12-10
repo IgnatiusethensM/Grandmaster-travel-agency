@@ -7,7 +7,7 @@
 <div class="destination-detail-page">
     <!-- Hero Section -->
     <section class="destination-hero"
-        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ destination.image }}');">
+        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ destination.get_image_url }}');">
         <div class="container">
             <div class="hero-content text-center">
                 <h1 class="hero-title text-white">{{ destination.name }}</h1>
