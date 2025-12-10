@@ -266,28 +266,34 @@
             <div class="services-grid">
                 {% for package in safari_packages %}
                 <div class="safari-card">
-                    <div class="safari-badge">Best Seller</div>
-                    <img src="{{ package.image }}" alt="{{ package.name }}" class="safari-image">
+                    {% if package.is_featured %}
+                    <div class="safari-badge">Featured</div>
+                    {% endif %}
+                    <img src="{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                        alt="{{ package.title }}" class="safari-image">
                     <div class="safari-content">
-                        <h3 class="service-name">{{ package.name }}</h3>
+                        <h3 class="service-name">{{ package.title }}</h3>
                         <div class="tour-meta">
                             <div class="tour-duration">
                                 <i data-lucide="clock" size="16"></i>
-                                <span>{{ package.duration }}</span>
+                                <span>{{ package.duration_days }} Days</span>
                             </div>
                             <div class="tour-price">
-                                <span>${{ package.price }}</span>
+                                <span>KES {{ package.price }}</span>
                             </div>
                         </div>
                         <div class="testimonial-rating" style="margin-top: 0.5rem;">
                             <i data-lucide="star" size="14" class="fill-current text-yellow-400"></i>
-                            <span style="font-size: 0.85rem; color: var(--text-light);">{{ package.rating }} ({{
-                                package.reviews }} reviews)</span>
+                            <span style="font-size: 0.85rem; color: var(--text-light);">5.0 (Featured)</span>
                         </div>
-                        <a href="{% url 'safari_package_detail' package.slug %}" class="btn-primary btn-sm"
+                        <a href="{% url 'package_detail' package.slug %}" class="btn-primary btn-sm"
                             style="width: 100%; margin-top: 1rem; text-decoration: none; display: inline-block; text-align: center;">View
                             Details</a>
                     </div>
+                </div>
+                {% empty %}
+                <div class="col-span-full text-center">
+                    <p>No featured packages at the moment. Please check back later!</p>
                 </div>
                 {% endfor %}
             </div>

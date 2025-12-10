@@ -1,56 +1,92 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container" style="margin-top: 2rem;">
-    <h1 class="section-title">Our Packages</h1>
-    <div class="grid" style="grid-template-columns: 1fr 3fr;">
+<div class="package-list-header"
+    style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; padding: 6rem 0; color: white; text-align: center; margin-bottom: 3rem;">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Our Safari Packages</h1>
+        <p class="lead">Curated wildlife experiences in the heart of Africa</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="grid" style="grid-template-columns: 250px 1fr; gap: 2rem;">
         <!-- Sidebar Filters -->
         <aside>
-            <div class="card" style="padding: 1.5rem;">
-                <h3>Filter By</h3>
+            <div class="glass-card" style="padding: 1.5rem; position: sticky; top: 100px;">
+                <h3 class="h5 mb-4">Filter By</h3>
                 <form method="get">
-                    <div style="margin-bottom: 1rem;">
-                        <label>Destination</label>
-                        <select name="destination" style="width: 100%; padding: 0.5rem;">
+                    <div class="mb-4">
+                        <label class="form-label text-sm fw-bold mb-2">Destination</label>
+                        <select name="destination" class="form-select w-100 p-2 border rounded">
                             <option value="">All Destinations</option>
                             {% for dest in destinations %}
-                            <option value="{{ dest.id }}">{{ dest.name }}</option>
+                            <option value="{{ dest.id }}" {% if request.GET.destination|add:"0"==dest.id %}selected{%
+                                endif %}>{{ dest.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label>Category</label>
-                        <select name="category" style="width: 100%; padding: 0.5rem;">
+                    <div class="mb-4">
+                        <label class="form-label text-sm fw-bold mb-2">Category</label>
+                        <select name="category" class="form-select w-100 p-2 border rounded">
                             <option value="">All Categories</option>
                             {% for cat in categories %}
-                            <option value="{{ cat.id }}">{{ cat.name }}</option>
+                            <option value="{{ cat.id }}" {% if request.GET.category|add:"0"==cat.id %}selected{% endif
+                                %}>{{ cat.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Filter</button>
+                    <button type="submit" class="btn-primary w-100">Apply Filters</button>
+                    {% if request.GET.destination or request.GET.category %}
+                    <a href="{% url 'package_list' %}" class="btn btn-link w-100 mt-2 text-center text-sm">Clear
+                        Filters</a>
+                    {% endif %}
                 </form>
             </div>
         </aside>
 
         <!-- Package Grid -->
-        <div class="grid">
+        <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
             {% for package in packages %}
-            <div class="card">
-                {% if package.images.first %}
-                <img src="{{ package.images.first.image.url }}" alt="{{ package.title }}">
-                {% else %}
-                <img src="https://via.placeholder.com/400x200" alt="{{ package.title }}">
-                {% endif %}
-                <div class="card-content">
-                    <h3 class="card-title">{{ package.title }}</h3>
-                    <p>{{ package.duration_days }} Days</p>
-                    <span class="card-price">From KES {{ package.price }}</span>
-                    <a href="{% url 'package_detail' package.slug %}" class="btn btn-primary"
-                        style="display: block; text-align: center; margin-top: 1rem;">View Details</a>
+            <article class="safari-card" style="height: 100%; display: flex; flex-direction: column;">
+                <div class="position-relative">
+                    {% if package.is_featured %}
+                    <span
+                        class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 px-3 py-1 rounded-pill fw-bold"
+                        style="z-index: 10;">Featured</span>
+                    {% endif %}
+                    <img src="{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                        alt="{{ package.title }}" class="safari-image"
+                        style="height: 240px; width: 100%; object-fit: cover;">
                 </div>
-            </div>
+
+                <div class="safari-content d-flex flex-column flex-grow-1 p-4">
+                    <div class="mb-2 text-uppercase text-secondary text-xs fw-bold">{{ package.destination.name }}</div>
+                    <h3 class="h4 mb-3 fw-bold">{{ package.title }}</h3>
+
+                    <div class="mt-auto">
+                        <div class="d-flex justify-content-between align-items-center mb-3 text-sm text-secondary">
+                            <div class="d-flex align-items-center">
+                                <i data-lucide="clock" size="16" class="me-1"></i>
+                                <span>{{ package.duration_days }} Days</span>
+                            </div>
+                            <div class="fw-bold text-primary" style="font-size: 1.1rem;">
+                                KES {{ package.price }}
+                            </div>
+                        </div>
+
+                        <a href="{% url 'package_detail' package.slug %}"
+                            class="btn-primary w-100 text-center text-decoration-none d-block">View Details</a>
+                    </div>
+                </div>
+            </article>
             {% empty %}
-            <p>No packages found matching your criteria.</p>
+            <div class="col-span-full text-center py-5">
+                <i data-lucide="compass" size="48" class="text-gray-300 mb-3"></i>
+                <p class="text-xl text-gray-500">No packages found matching your criteria.</p>
+                <a href="{% url 'package_list' %}" class="text-primary hover:underline">View all packages</a>
+            </div>
             {% endfor %}
         </div>
     </div>

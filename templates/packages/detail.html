@@ -1,68 +1,136 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="hero"
-    style="height: 50vh; background-image: url('{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/1200x600{% endif %}');">
-    <h1>{{ package.title }}</h1>
-    <p>{{ package.duration_days }} Days | {{ package.destination.name }}</p>
+<!-- Hero Section -->
+<div class="position-relative" style="height: 60vh; width: 100%; overflow: hidden;">
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/1920x800{% endif %}'); background-size: cover; background-position: center;">
+    </div>
+    <div
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));">
+    </div>
+    <div class="container position-relative h-100 d-flex flex-column justify-content-end pb-5 text-white">
+        <div class="d-flex gap-2 mb-3">
+            <span class="badge bg-primary px-3 py-2 rounded-pill">{{ package.destination.name }}</span>
+            {% if package.category %}
+            <span class="badge bg-light text-dark px-3 py-2 rounded-pill">{{ package.category.name }}</span>
+            {% endif %}
+        </div>
+        <h1 class="display-3 fw-bold mb-2">{{ package.title }}</h1>
+        <div class="d-flex align-items-center gap-4 text-lg">
+            <div class="d-flex align-items-center">
+                <i data-lucide="clock" class="me-2"></i> {{ package.duration_days }} Days
+            </div>
+            <div class="d-flex align-items-center">
+                <i data-lucide="map-pin" class="me-2"></i> {{ package.destination.country }}
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container" style="margin-top: 2rem; margin-bottom: 4rem;">
-    <div class="grid" style="grid-template-columns: 2fr 1fr;">
+<div class="container my-5">
+    <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 3rem;">
         <!-- Main Content -->
         <div>
-            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-                <h2>Overview</h2>
-                <p>{{ package.overview }}</p>
-            </div>
+            <!-- Overview -->
+            <section class="mb-5">
+                <h2 class="h3 mb-4 fw-bold text-dark border-bottom pb-2">Overview</h2>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    {{ package.overview|linebreaks }}
+                </div>
+            </section>
 
-            <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-                <h2>Itinerary</h2>
-                <ul>
+            <!-- Itinerary -->
+            <section class="mb-5">
+                <h2 class="h3 mb-4 fw-bold text-dark border-bottom pb-2">Itinerary</h2>
+                <div class="itinerary-timeline">
                     {% for day in package.itinerary %}
-                    <li style="margin-bottom: 1rem;">
-                        <strong>Day {{ forloop.counter }}:</strong> {{ day }}
-                    </li>
+                    <div class="d-flex gap-4 mb-4">
+                        <div class="flex-shrink-0" style="width: 4rem;">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
+                                style="width: 40px; height: 40px;">
+                                {{ forloop.counter }}
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 p-4 bg-light rounded-3 border">
+                            <h4 class="h6 fw-bold mb-2 text-primary">Day {{ forloop.counter }}</h4>
+                            <p class="mb-0 text-gray-700">{{ day }}</p>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
-            </div>
+                </div>
+            </section>
 
-            <div class="card" style="padding: 2rem;">
-                <h2>Inclusions</h2>
-                <ul style="list-style-type: disc; padding-left: 1.5rem;">
-                    {% for item in package.inclusions %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-                <h2 style="margin-top: 1rem;">Exclusions</h2>
-                <ul style="list-style-type: disc; padding-left: 1.5rem;">
-                    {% for item in package.exclusions %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+            <!-- Inclusions/Exclusions -->
+            <section class="mb-5">
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3 class="h5 mb-3 fw-bold text-success d-flex align-items-center">
+                            <i data-lucide="check-circle" class="me-2"></i> Included
+                        </h3>
+                        <ul class="list-unstyled">
+                            {% for item in package.inclusions %}
+                            <li class="mb-2 d-flex align-items-start">
+                                <i data-lucide="check" size="16" class="text-success me-2 mt-1"></i>
+                                <span>{{ item }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="h5 mb-3 fw-bold text-danger d-flex align-items-center">
+                            <i data-lucide="x-circle" class="me-2"></i> Not Included
+                        </h3>
+                        <ul class="list-unstyled">
+                            {% for item in package.exclusions %}
+                            <li class="mb-2 d-flex align-items-start">
+                                <i data-lucide="x" size="16" class="text-danger me-2 mt-1"></i>
+                                <span>{{ item }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- Booking Sidebar -->
         <aside>
-            <div class="card" style="padding: 2rem; position: sticky; top: 100px;">
-                <h3 style="color: var(--secondary-color); font-size: 1.5rem;">KES {{ package.price }}</h3>
-                <p>per person</p>
-                <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+            <div class="glass-card p-4 sticky-top" style="top: 100px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);">
+                <div class="text-center mb-4">
+                    <p class="text-sm text-secondary text-uppercase fw-bold mb-1">Starting From</p>
+                    <h2 class="display-6 fw-bold text-primary">KES {{ package.price }}</h2>
+                    <p class="text-sm text-secondary">per person</p>
+                </div>
+
+                <hr class="my-4 opacity-25">
+
                 <form action="{% url 'book_package' package.id %}" method="get">
-                    <div style="margin-bottom: 1rem;">
-                        <label>Travel Date</label>
-                        <input type="date" name="date" required style="width: 100%; padding: 0.5rem;">
+                    <div class="mb-3">
+                        <label class="form-label text-sm fw-bold">Date</label>
+                        <input type="date" name="date" required class="form-control p-2 w-100 rounded border">
                     </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label>Travelers</label>
+                    <div class="mb-4">
+                        <label class="form-label text-sm fw-bold">Travelers</label>
                         <input type="number" name="adults" min="1" value="1" required
-                            style="width: 100%; padding: 0.5rem;">
+                            class="form-control p-2 w-100 rounded border">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Book Now</button>
+
+                    <button type="submit" class="btn-primary w-100 py-3 fw-bold mb-3 shadow-sm hover-lift">
+                        Book Now
+                    </button>
+
+                    <button type="button"
+                        class="btn btn-outline-primary w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2">
+                        <i data-lucide="mail"></i> Request Custom Quote
+                    </button>
+
+                    <div class="mt-4 text-center text-xs text-secondary">
+                        <i data-lucide="shield-check" size="14" class="inline-block me-1"></i>
+                        Secure Booking • Best Price Guarantee
+                    </div>
                 </form>
-                <button class="btn" style="width: 100%; margin-top: 1rem; border: 1px solid #ddd;">Request Custom
-                    Quote</button>
             </div>
         </aside>
     </div>

@@ -82,6 +82,12 @@ SAFARI_PACKAGES = [
 ]
 
 def home(request):
+    # Fetch featured packages from DB
+    from packages.models import Package
+    safari_packages = Package.objects.filter(is_featured=True)[:3]
+    if not safari_packages:
+        safari_packages = Package.objects.all()[:3]
+
     context = {
         "nav_links": [
             {"name": "Home", "href": "/"},
@@ -130,7 +136,7 @@ def home(request):
                 "service": "Custom Itinerary"
             }
         ],
-        "safari_packages": SAFARI_PACKAGES,
+        "safari_packages": safari_packages,
         "special_offers": [
             {
                 "title": "Christmas in Cape Town",
