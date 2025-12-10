@@ -22,27 +22,26 @@ def populate():
     beach_cat = Category.objects.create(name="Beach", slug="beach")
 
     print("Creating destinations...")
-    # Note: Using placeholder paths for images. In a real scenario, we'd upload actual files.
     mombasa = Destination.objects.create(
         name="Mombasa",
         country="Kenya",
         slug="mombasa",
         description="A coastal city in southeastern Kenya along the Indian Ocean.",
-        hero_image="destinations/mombasa.jpg"
+        hero_image_url="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=80"
     )
     mara = Destination.objects.create(
         name="Maasai Mara",
         country="Kenya",
         slug="maasai-mara",
         description="One of the most famous and important wildlife conservation and wilderness areas in Africa.",
-        hero_image="destinations/mara.jpg"
+        hero_image_url="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=80"
     )
     zanzibar = Destination.objects.create(
         name="Zanzibar",
         country="Tanzania",
         slug="zanzibar",
         description="An archipelago off the coast of East Africa, known for its beaches and Stone Town.",
-        hero_image="destinations/zanzibar.jpg"
+        hero_image_url="https://images.unsplash.com/photo-1534764042898-10e30467b783?auto=format&fit=crop&w=1000&q=80"
     )
 
     print("Creating packages...")
@@ -65,7 +64,7 @@ def populate():
         exclusions=["Tips", "Drinks", "Personal items"],
         is_featured=True
     )
-    PackageImage.objects.create(package=p1, image="packages/mara_safari.jpg", caption="Lions in Mara")
+    PackageImage.objects.create(package=p1, image_url="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=80", caption="Lions in Mara")
 
     # Mombasa Package
     p2 = Package.objects.create(
@@ -87,7 +86,7 @@ def populate():
         exclusions=["Flights", "Personal expenses"],
         is_featured=True
     )
-    PackageImage.objects.create(package=p2, image="packages/mombasa_beach.jpg", caption="Mombasa Beach")
+    PackageImage.objects.create(package=p2, image_url="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=80", caption="Mombasa Beach")
 
     # Zanzibar Package
     p3 = Package.objects.create(
@@ -108,7 +107,7 @@ def populate():
         exclusions=["International flights", "Visa fees"],
         is_featured=True
     )
-    PackageImage.objects.create(package=p3, image="packages/zanzibar_stone_town.jpg", caption="Stone Town")
+    PackageImage.objects.create(package=p3, image_url="https://images.unsplash.com/photo-1534764042898-10e30467b783?auto=format&fit=crop&w=1000&q=80", caption="Stone Town")
 
     print("Database populated successfully!")
 

@@ -22,65 +22,12 @@
     <!-- 2. QUICK BOOKING SEARCH BAR -->
     <div class="search-container" id="start-journey">
         <div class="search-box">
-            <div class="search-tabs">
-                <button class="search-tab active" onclick="openTab(event, 'safaris')">Safaris</button>
-                <button class="search-tab" onclick="openTab(event, 'hotels')">Hotels</button>
-                <button class="search-tab" onclick="openTab(event, 'transfers')">Transfers</button>
-            </div>
-
             <!-- Safaris Form (Default Active) -->
             <div id="safaris" class="search-form active" style="display: block;">
                 <div class="text-center">
                     <h3 class="mb-3">Explore Our Exclusive Safari Packages</h3>
                     <a href="{% url 'safari_packages' %}" class="btn-primary">View All Packages</a>
                 </div>
-            </div>
-
-            <!-- Hotels Form -->
-            <div id="hotels" class="search-form" style="display: none;">
-                <form action="{% url 'hotel_results' %}" method="GET" class="search-form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Destination</label>
-                        <input type="text" name="location" class="form-input" placeholder="City, Hotel, or Area"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Check-in</label>
-                        <input type="date" name="check_in" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Check-out</label>
-                        <input type="date" name="check_out" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn-primary" style="width: 100%;">Search Hotels</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Transfers Form -->
-            <div id="transfers" class="search-form" style="display: none;">
-                <form action="{% url 'transfer_results' %}" method="GET" class="search-form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Pickup</label>
-                        <input type="text" name="pickup" class="form-input" placeholder="Airport or Address" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Dropoff</label>
-                        <input type="text" name="dropoff" class="form-input" placeholder="Destination" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Date</label>
-                        <input type="date" name="date" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Time</label>
-                        <input type="time" name="time" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn-primary" style="width: 100%;">Search Rides</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -93,26 +40,8 @@
                 <p class="section-subtitle">Comprehensive travel solutions for every journey</p>
             </div>
 
-            <div class="services-grid">
-                <!-- Flights card removed -->
-                <div class="glass-card service-card">
-                    <div class="service-icon">
-                        <i data-lucide="bed" size="32"></i>
-                    </div>
-                    <h3 class="service-name">Hotels</h3>
-                    <p class="service-desc">Luxury stays at affordable rates</p>
-                    <a href="{% url 'search_hotels' %}" class="service-link">Book Now <i data-lucide="arrow-right"
-                            size="16"></i></a>
-                </div>
-                <div class="glass-card service-card">
-                    <div class="service-icon">
-                        <i data-lucide="car" size="32"></i>
-                    </div>
-                    <h3 class="service-name">Transfers</h3>
-                    <p class="service-desc">Reliable airport transfers & local rides</p>
-                    <a href="{% url 'search_transfers' %}" class="service-link">Book Now <i data-lucide="arrow-right"
-                            size="16"></i></a>
-                </div>
+            <div class="services-grid"
+                style="grid-template-columns: repeat(1, minmax(300px, 600px)); justify-content: center;">
                 <div class="glass-card service-card">
                     <div class="service-icon">
                         <i data-lucide="compass" size="32"></i>
