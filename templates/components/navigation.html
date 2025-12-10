@@ -41,7 +41,7 @@
 
                         <!-- Auth Links -->
                         {% if user.is_authenticated %}
-                        <li class="nav-item has-dropdown">
+                        <li class="nav-item has-dropdown" style="margin-left: auto;">
                             <a href="#" class="nav-link text-gold font-semibold">
                                 <i data-lucide="user" class="icon-sm me-1"></i> Account
                                 <i data-lucide="chevron-down" class="dropdown-icon"></i>
@@ -65,7 +65,7 @@
                             </div>
                         </li>
                         {% else %}
-                        <li class="nav-item">
+                        <li class="nav-item" style="margin-left: auto;">
                             <a href="{% url 'login' %}" class="btn-primary btn-sm" style="margin-left: 1rem;">Login</a>
                         </li>
                         {% endif %}
