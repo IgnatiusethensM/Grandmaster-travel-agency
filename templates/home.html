@@ -239,7 +239,7 @@
                     {% if package.is_featured %}
                     <div class="safari-badge">Featured</div>
                     {% endif %}
-                    <img src="{% if package.images.first %}{{ package.images.first.image.url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
+                    <img src="{% if package.images.first %}{{ package.images.first.get_image_url }}{% else %}https://via.placeholder.com/800x600{% endif %}"
                         alt="{{ package.title }}" class="safari-image">
                     <div class="safari-content">
                         <h3 class="service-name">{{ package.title }}</h3>
