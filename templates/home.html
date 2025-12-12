@@ -123,36 +123,7 @@
         </div>
     </section>
 
-    <!-- 7. TESTIMONIALS -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">What Our Travelers Say</h2>
-                <p class="section-subtitle">Real experiences from our valued guests</p>
-            </div>
 
-            <div class="testimonials-grid">
-                {% for testimonial in testimonials %}
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="testimonial-avatar">
-                        <div>
-                            <h4 class="testimonial-name">{{ testimonial.name }}</h4>
-                            <p class="testimonial-location">{{ testimonial.location }}</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating">
-                        {% for i in "12345"|make_list %}
-                        <i data-lucide="star" size="16" class="fill-current text-yellow-400"></i>
-                        {% endfor %}
-                    </div>
-                    <p class="testimonial-text">"{{ testimonial.text }}"</p>
-                    <span class="testimonial-tag">{{ testimonial.service }}</span>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
 
     <!-- 6. SAFARI PACKAGES SHOWCASE -->
     <section class="section-padding">
